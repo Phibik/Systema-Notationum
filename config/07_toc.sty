@@ -1,0 +1,51 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/07_toc}[Configuración de la Tabla de Contenidos (ToC) y partes]
+
+\RequirePackage{config/02_basics}
+
+\RequirePackage{titletoc}
+
+%====================================================%
+
+% https://tex.stackexchange.com/questions/169068/pretty-list-of-figures-and-list-of-tables %%%%%%%%%%%%%% list of table...
+% https://tex.stackexchange.com/questions/19796/how-to-customize-the-table-of-contents-using-tikz
+% https://tex.stackexchange.com/questions/430157/how-to-add-the-contents-in-the-beginning-of-a-chapter
+% https://texblog.org/2011/09/09/10-ways-to-customize-tocloflot/
+% https://tex.stackexchange.com/questions/74524/minitoc-parttoc-on-the-same-page-as-the-part-title
+% https://tex.stackexchange.com/questions/169068/pretty-list-of-figures-and-list-of-tables
+%\RequirePackage{tocloft}
+
+%====================================================%
+
+% Comportamiento de Partes y minitoc en la ToC
+\makeatletter
+\def\@endpart{
+	\vfil
+	\textcolor{text_base_color}{Chapters \hrule height 1.5 pt}
+	\setcounter{tocdepth}{1}
+	\startcontents[parts]
+	\printcontents[parts]{}{0}{}
+	\textcolor{text_base_color}{\hrule height 1.5 pt}
+	\par\bigskip
+	\vfil\newpage
+	\if@twoside
+	\if@openright
+	\null
+	\thispagestyle{empty}%
+	\newpage
+	\fi
+	\fi
+	\if@tempswa
+	\twocolumn
+	\fi
+}
+
+% Formato visual del elemento Part en la ToC
+\renewcommand{\l@part}[2]{%
+	\ifnum \c@tocdepth >-2
+	\addpenalty{-\@highpenalty}%
+	\vskip 2em
+	{\noindent\bfseries\scshape\large #1\hfill #2}\par
+	\fi
+}
+\makeatother

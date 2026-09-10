@@ -1,0 +1,75 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/10_tables}[Configuración de tablas y tipos de columnas personalizados]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics}
+\RequirePackage{config/03_typography}
+\RequirePackage{config/05_symbols}
+
+\RequirePackage{xltabular}
+\RequirePackage{multirow}
+\RequirePackage{tabularray}
+
+%====================================================%
+
+% alto de fila base
+\renewcommand{\arraystretch}{1}
+
+%====================================================%
+
+% color de encabezado de tabla según tema
+\ifdefstring{\docstyle}{dark}
+{
+	\newcommand{\tableHeaderBg}{WB7}
+}{}
+\ifdefstring{\docstyle}{formal}
+{
+	\newcommand{\tableHeaderBg}{WB28}
+}{}
+
+% tipos de columnas personalizados -->> \begin{tab}{4}{|+F|-c|-f|-C|}{First entry & Second entry & Third entry & Fourth entry}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{f}{>{\cellcolor{\tableHeaderBg}\bfseries\centering\arraybackslash}c}
+\newcolumntype{F}{>{\cellcolor{\tableHeaderBg}\bfseries\centering\arraybackslash}X}
+\newcolumntype{+}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{-}{>{\currentrowstyle}}
+
+% estilo por fila y alineación vertical en tabularx
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}#1\ignorespaces}
+\renewcommand{\tabularxcolumn}[1]{>{\arraybackslash}m{#1}}
+
+%====================================================%
+
+% Remapeos de tablas
+% MOLT IMPORTANT QUE SI DONA ERROR S'HA DE POSAR \hspace{0pt} LA PRINCIPI DE CADA LINEA
+\setlength{\LTpost}{0pt}
+
+% taula amb títol
+\newenvironment{tab}[3]{%
+	\renewcommand{\arraystretch}{1.5}%
+	\xltabular{\textwidth}{#2}
+	\hline
+	\rowcolor{\tableHeaderBg}\rowstyle{\bfseries} #3 \\
+	\hline
+	\endfirsthead
+	\multicolumn{#1}{c}{\phantom{\textsubw{\textsubw{\textsubw{k}}}}\hspace{-5.2pt}\color{Y1} \faArrowUp \quad\quad\quad\quad\quad \faArrowUp \quad\quad\quad\quad\quad \faArrowUp \quad\quad\quad\quad\quad \faArrowUp \quad\quad\quad\quad\quad \faArrowUp} \\
+	\hline
+	\endhead
+	\multicolumn{#1}{c}{\phantom{\textoverw{\textoverw{\textoverw{k}}}}\hspace{-5.2pt}\color{Y1} \faArrowDown \quad\quad\quad\quad\quad \faArrowDown \quad\quad\quad\quad\quad \faArrowDown \quad\quad\quad\quad\quad \faArrowDown \quad\quad\quad\quad\quad \faArrowDown}
+	\endfoot
+	\hline
+	\endlastfoot
+}{\endxltabular\renewcommand{\arraystretch}{1}}
+
+% taula sense títol
+\newenvironment{tabraw}[2]{%
+	\renewcommand{\arraystretch}{1.5}%
+	\xltabular{\textwidth}{#2}
+	\endfirsthead
+	\multicolumn{#1}{c}{\phantom{\textsubw{\textsubw{\textsubw{k}}}}\hspace{-5.2pt}\color{Y1} \faArrowUp \quad\quad\quad\quad\quad \faArrowUp \quad\quad\quad\quad\quad \faArrowUp \quad\quad\quad\quad\quad \faArrowUp \quad\quad\quad\quad\quad \faArrowUp} \\
+	\hline
+	\endhead
+	\multicolumn{#1}{c}{\phantom{\textoverw{\textoverw{\textoverw{k}}}}\hspace{-5.2pt}\color{Y1} \faArrowDown \quad\quad\quad\quad\quad \faArrowDown \quad\quad\quad\quad\quad \faArrowDown \quad\quad\quad\quad\quad \faArrowDown \quad\quad\quad\quad\quad \faArrowDown}
+	\endfoot
+	\endlastfoot
+}{\endxltabular\renewcommand{\arraystretch}{1}}

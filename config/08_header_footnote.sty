@@ -1,0 +1,73 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/08_header_footnote}[Cabeceras, pies de página y notas al pie]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics}
+\RequirePackage{config/06_tikz}
+
+\RequirePackage[hang, flushmargin, bottom]{footmisc}
+\RequirePackage{fancyhdr}
+
+%====================================================%
+
+% cabeceras y estilo de página
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\fancyhead[C]{}
+\fancyhead[L]{\textsc{\titleheader}}
+\setlength{\headheight}{15pt}
+
+%====================================================%
+
+% configuración de notas al pie (tema)
+\ifdefstring{\docstyle}{dark}{\newcommand{\footnoteColorConfig}{C3}}{}
+\ifdefstring{\docstyle}{formal}{\newcommand{\footnoteColorConfig}{black}}{}
+
+% configuración de notas al pie
+\renewcommand{\thefootnote}{\color{\footnoteColorConfig}[\arabic{footnote}]}
+\let\oldfootnote\footnote
+\renewcommand{\footnote}[1]{\oldfootnote{\;#1}}						% \footnote{text}: numerada automaticamente
+\newcommand\varfootnote[1]{%										% \varfootnote{text}: no numerada, util con $\dagger$ o * para hacer notación agrupadas en varios terminos
+	\bgroup\renewcommand\thefootnote{\fnsymbol{footnote}}%
+	\renewcommand\thempfootnote{\fnsymbol{mpfootnote}}%
+	\footnotetext[0]{#1}\egroup%
+}
+
+%====================================================%
+
+% Cabecera
+\ifdefstring{\docstyle}{dark}
+{
+	\renewcommand{\headrule}{\tikz{
+			\draw[line width=0.4mm](0,0)--(16,0);
+			\draw[line width=0.4mm](0,0)--(0.15,-0.15)--(0.6,-0.15)--(0.65,-0.1)--(1,-0.1)--(1.1,0);
+			\filldraw(0,0) circle (0.125mm);
+			\draw[line width=0.4mm](16,0)--(15.85,-0.15)--(15.4,-0.15)--(15.35,-0.1)--(15,-0.1)--(14.9,0);
+			\filldraw(16,0) circle (0.125mm);
+			\draw[color=WB5](0,-0.75);
+	}}
+}{}
+\ifdefstring{\docstyle}{formal}
+{
+
+}{}
+
+%====================================================%
+
+% Notas de pie
+\ifdefstring{\docstyle}{dark}
+{
+	\renewcommand{\footnoterule}{\kern-30pt\tikz{
+			\draw[line width=0.4mm](1mm,0)--(15.9,0);
+			\draw[line width=0.4mm](0,0) circle (1mm);
+			\filldraw(0,0) circle (0.3mm);
+			\draw[line width=0.4mm](16,0) circle (1mm);
+			\filldraw(16,0) circle (0.3mm);
+			\draw[color=WB5](0,-0.2);
+	}}
+	\addtolength{\skip\footins}{2pc plus 5pt}
+}{}
+\ifdefstring{\docstyle}{formal}
+{
+
+}{}

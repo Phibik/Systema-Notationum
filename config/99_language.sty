@@ -1,0 +1,14 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/99_language}[Selección de la lengua]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics}
+\RequirePackage{config/03_typography}
+\RequirePackage{config/05_symbols}
+
+%====================================================%
+
+\ifdefstring{\doclanguage}{la}{\RequirePackage{config/languages/Lingua}}{}
+\ifdefstring{\doclanguage}{ca}{\RequirePackage{config/languages/Llengua}}{}
+\ifdefstring{\doclanguage}{es}{\RequirePackage{config/languages/Lengua}}{}
+\ifdefstring{\doclanguage}{en}{\RequirePackage{config/languages/Language}}{}

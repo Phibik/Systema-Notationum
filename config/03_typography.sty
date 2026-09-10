@@ -1,0 +1,145 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/03_typography}[Fuentes, Polyglossia y formato de texto]
+
+% Carga del motor tipográfico
+\RequirePackage{fontspec}
+
+%====================================================%
+
+% UN DIA VA PETAR PER LA CACHÉ, QUE ESTA EN C:\texlive\2024\texmf-var\luatex-cache\
+% Es bo eliminarla si peta o s'esta debuguejant
+% També sé que no peta si treus els [Path] i poses les fonts en ./ (al mateix lloc que main.tex)
+
+%====================================================%
+
+\newcommand{\fsize}[1]{\fontsize{#1}{#1}\selectfont}
+
+%====================================================%
+
+% Fuente principal (Computer Modern Unicode)
+\setmainfont{cmun}[
+Extension      = .otf,
+UprightFont    = *rm,
+BoldFont       = *bx,
+ItalicFont     = *ti,
+BoldItalicFont = *bi,
+SlantedFont    = *sl,
+Ligatures      = {NoCommon},
+]
+
+%====================================================%
+
+\newfontfamily\cmrbbfam[Path = ./fonts/, Extension = .ttf, NFSSFamily = cmrbb]{cmrbb}
+
+\DeclareMathAlphabet{\cmrbb}{TU}{cmrbb}{m}{n}
+
+%====================================================%
+
+\newfontfamily\monocraft[Path = ./fonts/, Extension = .ttf, NFSSFamily = mc]{monocraft}
+
+\newcommand{\textmc}[1]{{\fsize{9pt}\monocraft{#1}}}
+\newcommand{\titlemc}[1]{{\monocraft{#1}}}
+
+%====================================================%
+
+\setmonofont[Path = ./fonts/, Extension = .ttf, Contextuals=Alternate]{FiraCode-Regular}
+
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\fsize{10pt}{\oldtexttt{#1}}}}
+\newcommand{\titlett}[1]{\oldtexttt{#1}}
+
+%====================================================%
+
+% Font per tots els unicode, especialment per imprimir caracters com Ϝ ϝ Ͷ ͷ Ͱ ͱ Ϻ ϻ Ϙ ϙ Ϟ ϟ Ͳ ͳ Ϡ ϡ Ϸ ϸ Ϛ ϛ
+\newfontfamily\notofont{Noto Serif}
+\newcommand{\textnoto}[1]{{\notofont #1}}
+
+\newfontfamily\freefont{FreeSerif}
+\newcommand{\textfree}[1]{{\freefont #1}}
+
+\newfontfamily\gentiumfont{Gentium Plus}
+\newcommand{\textgentium}[1]{{\gentiumfont #1}}
+
+\newfontfamily\dejavufont{DejaVu Serif}
+\newcommand{\textdejavu}[1]{{\dejavufont #1}}
+
+\newfontfamily\libertfont{Libertinus Serif}
+\newcommand{\textlibert}[1]{{\libertfont #1}}
+
+\newfontfamily\junifont{Junicode}
+\newcommand{\textjuni}[1]{{\junifont #1}}
+
+\newfontfamily\stixfont{STIX Two Text}
+\newcommand{\textstix}[1]{{\stixfont #1}}
+
+\newfontfamily\gfsdidotfont{GFS Didot}
+\newcommand{\textgfsdidot}[1]{{\gfsdidotfont #1}}
+
+%====================================================%
+
+% Idiomas y fuentes multilingües (Polyglossia)
+\RequirePackage{polyglossia}
+
+\newfontfamily\hebrewfont[Script=Hebrew]{Hadasim CLM}
+\setotherlanguage{hebrew}
+
+\setotherlanguage{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+
+\setotherlanguage{greek}
+\newfontfamily\greekfont[Script=Greek]{CMU Serif}
+
+\setotherlanguage{hindi}
+\setotherlanguage{sanskrit}
+\newfontfamily\hindifont[Script=Devanagari, Renderer=HarfBuzz]{Shobhika}
+\newfontfamily\sanskritfont[Script=Devanagari, Renderer=HarfBuzz]{Shobhika}
+
+\setotherlanguage{thai}
+\newfontfamily\thaifont[Script=Thai, Renderer=HarfBuzz]{Garuda}
+
+\setotherlanguage{chinese}
+\setotherlanguage{japanese}			% potser necesari posar \allowbreak
+\setotherlanguage{korean}
+
+\newfontfamily\chinesefont[Script=CJK]{FandolSong-Regular}
+\newfontfamily\japanesefont[Script=CJK]{HaranoAjiMincho-Regular}
+\newfontfamily\koreanfont[Script=Hangul]{UnBatang}
+
+\setotherlanguage{georgian}
+\newfontfamily\georgianfont[Script=Georgian]{FreeSerif}
+
+\setotherlanguage{armenian}
+\newfontfamily\armenianfont[Script=Armenian]{FreeSerif}
+
+\setotherlanguage{coptic}
+\newfontfamily\copticfont[Script=Coptic]{FreeSerif}
+
+%====================================================%
+
+% Para matematicas
+% Clásicos y Semíticos
+\newcommand{\mgreek}[1]{\text{\textgreek{#1}}}
+\newcommand{\marabic}[1]{\text{\textarabic{#1}}}
+\newcommand{\mhebrew}[1]{\text{\texthebrew{#1}}}
+
+% Indostánicos y Sudeste Asiático
+\newcommand{\mhindi}[1]{\text{\texthindi{#1}}}
+\newcommand{\msanskrit}[1]{\text{\textsanskrit{#1}}}
+\newcommand{\mthai}[1]{\text{\textthai{#1}}}
+
+% CJK (Asia Oriental)
+\newcommand{\mchinese}[1]{\text{\textchinese{#1}}}
+\newcommand{\mjapanese}[1]{\text{\textjapanese{#1}}}
+\newcommand{\mkorean}[1]{\text{\textkorean{#1}}}
+
+% Cáucaso y Antiguos
+\newcommand{\mgeorgian}[1]{\text{\textgeorgian{#1}}}
+\newcommand{\marmenian}[1]{\text{\textarmenian{#1}}}
+\newcommand{\mcoptic}[1]{\text{\textcoptic{#1}}}
+
+%====================================================%
+
+% IPA see https://ptmartins.info/tex/tipacheatsheet.pdf and tipa package
+\RequirePackage[safe]{tipa}       % Símbolos base de IPA
+\RequirePackage{tipx}             % Extensión de símbolos IPA
+\RequirePackage{extraipa}         % Acentos fonéticos adicionales

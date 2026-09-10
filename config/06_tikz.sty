@@ -1,0 +1,30 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/06_tikz}[Configuración de TikZ y diagramas]
+
+%====================================================%
+
+% Paquetes base de gráficos
+\RequirePackage{tikz}
+\RequirePackage{tikz-3dplot}
+\RequirePackage[american, RPvoltages, cute inductors]{circuitikz}
+
+% Librerías de TikZ que utilizas
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+
+%====================================================%
+
+% Figura centrada: con [texto] genera caption, si se deja []/vacío imprime "Figure X" en negrita
+\newenvironment{fig}[1][]{\begin{figure}[h!]\centering\def\tcap{#1}\ifx\tcap\empty\refstepcounter{figure}\fi}{\ifx\tcap\empty\par\vspace{10pt}\textbf{\figurename~\thefigure}\else\caption{\tcap}\fi\end{figure}}
+
+% TikZ centrado con argumento opcional de escala [ej: 1.5]
+\newenvironment{graph}[1][1]{\begin{center}\begin{tikzpicture}[scale=#1]}{\end{tikzpicture}\end{center}}
+
+% TikZ en línea (sin centrar) alineado al texto en Y=0
+\newenvironment{vargraph}[1][1]{\begin{tikzpicture}[baseline={(0,0)}, scale=#1]}{\end{tikzpicture}}
+
+% CircuiTikz centrado en bloque
+\newenvironment{circuit}{\begin{center}\begin{circuitikz}}{\end{circuitikz}\end{center}}
+
+% CircuiTikz en línea (sin centrar) alineado al texto en Y=0
+\newenvironment{varcircuit}{\begin{circuitikz}[baseline={(0,0)}]}{\end{circuitikz}}

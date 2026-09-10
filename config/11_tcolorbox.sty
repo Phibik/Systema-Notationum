@@ -1,0 +1,94 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/11_tcolorbox}[Cajas personalizadas y bloques de aviso con tcolorbox]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics}
+\RequirePackage{config/05_symbols}
+\RequirePackage{config/06_tikz}
+
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{varwidth}
+\RequirePackage{listings}
+\tcbuselibrary{skins, breakable, hooks, listings}
+
+%====================================================%
+
+% configuración de colores y estilo base según tema
+\ifdefstring{\docstyle}{dark}
+{
+	\newcommand{\tcbBgColor}{WB4}
+	\newcommand{\tcbHeaderBg}{WB6}
+	\newcommand{\tcbTextColor}{white}
+	\newcommand{\tcbBorderColor}{WB10}
+}{}
+\ifdefstring{\docstyle}{formal}
+{
+	%\newcommand{\tcbBgColor}{WB31}
+	%\newcommand{\tcbHeaderBg}{WB28}
+	%\newcommand{\tcbTextColor}{WB0}
+	%\newcommand{\tcbBorderColor}{WB20}
+}{}
+
+%====================================================%
+
+%% plantilla de estilos base (reutilizables)
+\tcbset{
+	% base para cajas grandes con corte de página y líneas overlay
+	base frame overlay/.style={
+		enhanced, breakable, center,
+		halign title=flush center,
+		boxrule=1pt, arc=2mm, rounded corners,
+		colback=\tcbHeaderBg, coltext=\tcbTextColor,
+		overlay first={
+			\draw[line width=1pt, #1] (frame.south west)--(frame.south east);},
+		overlay middle={
+			\draw[line width=1pt, #1] (frame.south west)--(frame.south east);
+			\draw[line width=1pt, #1] (frame.north west)--(frame.north east);},
+		overlay last={
+			\draw[line width=1pt, #1] (frame.north west)--(frame.north east);}
+	},
+	% base para miniboxes ajustadas al contenido
+	base minibox/.style={
+		enhanced, hbox, center, varwidth upper,
+		before upper app=\centering, halign title=flush center,
+		boxrule=1pt, arc=2mm, rounded corners,
+		colback=\tcbHeaderBg, coltext=\tcbTextColor
+	},
+	% base para títulos de cajas
+	base title style/.style={
+		title={#1}, fonttitle=\large\bfseries,
+		toptitle=1.5mm, bottomtitle=0.75mm,
+		coltitle=\tcbHeaderBg
+	},
+	% base para avisos laterales (callouts)
+	base callout/.style={
+		enhanced, breakable, arc=2pt, boxrule=0.8pt, blanker,
+		colback=\tcbHeaderBg!40!\tcbBgColor, coltext=\tcbTextColor,
+		top=4pt, bottom=4pt, left=10pt, right=4pt
+	}
+}
+
+%====================================================%
+
+% entornos simplificados
+
+% serie 1: marco amarillo (Y1)
+\newtcolorbox{minibox1}[1]{base minibox, base title style={#1}, colframe=Y1}
+\newtcolorbox{miniboxless1}{base minibox, colframe=Y1}
+\newtcolorbox{box1}[1]{base frame overlay=Y1, base title style={#1}, colframe=Y1}
+\newtcolorbox{boxless1}{base frame overlay=Y1, colframe=Y1}
+
+% serie 2: marco dinámico (blanco en dark / texto base en formal)
+\newtcolorbox{minibox2}[1]{base minibox, base title style={#1}, colframe=\tcbTextColor}
+\newtcolorbox{miniboxless2}{base minibox, colframe=\tcbTextColor}
+\newtcolorbox{box2}[1]{base frame overlay=\tcbTextColor, base title style={#1}, colframe=\tcbTextColor}
+\newtcolorbox{boxless2}{base frame overlay=\tcbTextColor, colframe=\tcbTextColor}
+
+%====================================================%
+
+% bloques de aviso laterales (callouts)
+\newtcolorbox{infobox}[1][]{base callout, borderline west={3pt}{0pt}{C2}, title={\infoicon\quad\textbf{\color{C2}Información}}, #1}		% FALTA REVISAR i IDIOMA
+\newtcolorbox{warnbox}[1][]{base callout, borderline west={3pt}{0pt}{Y2}, title={\warnicon\quad\textbf{\color{Y2}Advertencia}}, #1}
+\newtcolorbox{errorbox}[1][]{base callout, borderline west={3pt}{0pt}{R2}, title={\xmark\quad\textbf{\color{R2}Atención}}, #1}
+\newtcolorbox{notebox}[1][]{base callout, borderline west={3pt}{0pt}{P2}, title={\noteicon\quad\textbf{\color{P2}Nota}}, #1}
+\newtcolorbox{tipbox}[1][]{base callout, borderline west={3pt}{0pt}{G2}, title={\cmark\quad\textbf{\color{G2}Consejo}}, #1}

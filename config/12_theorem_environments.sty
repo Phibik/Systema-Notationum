@@ -1,0 +1,405 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/12_theorem_environments}[Entornos de teoremas, definiciones y símbolos QED con contador compartido]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics}
+\RequirePackage{config/04_math}
+\RequirePackage{config/05_symbols}
+
+%====================================================%
+
+%\newcommand{\fin}{\ifmmode\eqno{\blacksquare}\else\unskip\penalty10000\hfill\nobreak\quad$\blacksquare$\fi} % punto y aparte grande (QED)
+%\qed
+
+%====================================================%
+
+% Lógica de colocación automática de símbolo qed al final de los entornos
+\makeatletter
+% Cerrojos de seguridad
+\newif\if@cuadroPuesto
+\newif\if@in@theorem
+\newif\if@just@started@thm
+
+\newcommand{\qedsymbolshape}{$\blacksquare$}
+
+% Función dibujadora (detecta entorno matemático o texto)
+\newcommand{\ponercuadro}{%
+	\if@cuadroPuesto\else
+	\global\@cuadroPuestotrue
+	\ifmmode
+	\ifdefined\tag
+	\tag*{\rlap{\hspace{0.6em}\qedsymbolshape}}%
+	\else
+	\eqno{\rlap{\hspace{0.6em}\qedsymbolshape}}%
+	\fi
+	\else
+	\unskip\nobreak\hspace*{\fill}\rlap{\hspace{0.6em}\qedsymbolshape}%
+	\fi
+	\fi
+}
+
+% Intercepción de \] para colocar qed al final del modo Display
+\let\old@enddisplay\]
+\newcommand{\mi@enddisplay}{%
+	\@ifnextchar\end{\ponercuadro\old@enddisplay}{\old@enddisplay}%
+	}
+	
+	% Aplicación de qed relleno
+	\newcommand{\addmarginqed}[1]{%
+\AtBeginEnvironment{#1}{%
+	\global\@in@theoremtrue
+	\global\@cuadroPuestofalse
+	\global\@just@started@thmtrue
+	\everypar{\global\@just@started@thmfalse}%
+	\def\qedsymbolshape{$\blacksquare$}%
+	\let\]\mi@enddisplay
+}%
+\AtEndEnvironment{#1}{%
+	\ponercuadro
+	\global\@in@theoremfalse
+}%
+}
+
+% Aplicación de qed hueco
+\newcommand{\addmarginqedhollow}[1]{%
+\AtBeginEnvironment{#1}{%
+	\global\@in@theoremtrue
+	\global\@cuadroPuestofalse
+	\global\@just@started@thmtrue
+	\everypar{\global\@just@started@thmfalse}%
+	\def\qedsymbolshape{$\square$}%
+	\let\]\mi@enddisplay
+}%
+\AtEndEnvironment{#1}{%
+	\ponercuadro
+	\global\@in@theoremfalse
+}%
+}
+
+
+% Macro para entornos que NO llevan QED pero necesitan corregir la primera lista
+\newcommand{\addlistfix}[1]{%
+	\AtBeginEnvironment{#1}{%
+		\global\@just@started@thmtrue
+		\everypar{\global\@just@started@thmfalse}%
+	}%
+}
+
+% Configuración de listas dentro de entornos (sin depender de \@in@theorem)
+\newcommand{\@configurar@lista@teorema}{%
+	\if@just@started@thm
+	\leavevmode
+	\global\@just@started@thmfalse
+	\fi
+}
+
+% Hooks para enumerate e itemize
+\AtBeginEnvironment{enumerate}{\@configurar@lista@teorema}
+\AtBeginEnvironment{itemize}{\@configurar@lista@teorema}
+
+\AtEndEnvironment{enumerate}{\if@in@theorem\ponercuadro\fi}
+\AtEndEnvironment{itemize}{\if@in@theorem\ponercuadro\fi}
+
+\makeatother
+
+%====================================================%
+
+% Definición de estilos de teoremas
+
+% estilo 1: Triángulo sólido en el margen
+\newtheoremstyle{TrianguloSolido}%
+{15pt}{15pt}% espacio superior e inferior
+{\normalfont}% fuente del cuerpo
+{0pt}% indentación
+{\bfseries}% fuente del título
+{:}% puntuación
+{.5em}% espacio tras puntuación
+{\llap{\raisebox{0.15ex}{\small$\blacktriangleright$}\hspace{0.6em}}\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+% estilo 2: Triángulo hueco en el margen
+\newtheoremstyle{TrianguloHueco}%
+{15pt}{15pt}%
+{\normalfont}%
+{0pt}%
+{\bfseries}{:}%
+{.5em}%
+{\llap{\raisebox{0.15ex}{\small$\vartriangleright$}\hspace{0.6em}}\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+% estilo 3: Rombo sólido en el margen
+\newtheoremstyle{RomboSolido}%
+{10pt}{10pt}% espacio vertical algo más ajustado
+{\normalfont}%
+{0pt}%
+{\bfseries}%
+{:}%
+{.5em}%
+{\llap{\raisebox{0.15ex}{\small$\blacklozenge$}\hspace{0.6em}}\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+% estilo 4: Rombo hueco en el margen
+\newtheoremstyle{RomboHueco}%
+{10pt}{10pt}%
+{\normalfont}%
+{0pt}%
+{\bfseries}%
+{:}%
+{.5em}%
+{\llap{\raisebox{0.15ex}{\small$\lozenge$}\hspace{0.6em}}\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+%====================================================%
+
+% estilo 1: Triángulo sólido en el margen
+\newtheoremstyle{TrianguloSolidoManual}%
+{15pt}{15pt}% espacio superior e inferior
+{\normalfont}% fuente del cuerpo
+{0pt}% indentación
+{\bfseries}% fuente del título
+{}% puntuación vacía (se gestiona dinámicamente en la cabecera)
+{.5em}% espacio tras puntuación
+{%
+	\llap{\raisebox{0.15ex}{\small$\blacktriangleright$}\hspace{0.6em}}%
+	\ifstrempty{#1}{%
+		\ifstrempty{#3}{}{#3:}% si no hay nombre (#1), imprime #3: solo si no está vacío
+	}{%
+		#1\ifstrempty{#3}{:}{ (#3):}% si hay nombre (#1), añade el colon o los paréntesis con colon
+	}%
+}
+
+% estilo 2: Triángulo hueco en el margen
+\newtheoremstyle{TrianguloHuecoManual}%
+{15pt}{15pt}%
+{\normalfont}%
+{0pt}%
+{\bfseries}%
+{}%
+{.5em}%
+{%
+	\llap{\raisebox{0.15ex}{\small$\vartriangleright$}\hspace{0.6em}}%
+	\ifstrempty{#1}{%
+		\ifstrempty{#3}{}{#3:}%
+	}{%
+		#1\ifstrempty{#3}{:}{ (#3):}%
+	}%
+}
+
+% estilo 3: Rombo sólido en el margen
+\newtheoremstyle{RomboSolidoManual}%
+{10pt}{10pt}% espacio vertical algo más ajustado
+{\normalfont}%
+{0pt}%
+{\bfseries}%
+{}%
+{.5em}%
+{%
+	\llap{\raisebox{0.15ex}{\small$\blacklozenge$}\hspace{0.6em}}%
+	\ifstrempty{#1}{%
+		\ifstrempty{#3}{}{#3:}%
+	}{%
+		#1\ifstrempty{#3}{:}{ (#3):}%
+	}%
+}
+
+% estilo 4: Rombo hueco en el margen
+\newtheoremstyle{RomboHuecoManual}%
+{10pt}{10pt}%
+{\normalfont}%
+{0pt}%
+{\bfseries}%
+{}%
+{.5em}%
+{%
+	\llap{\raisebox{0.15ex}{\small$\lozenge$}\hspace{0.6em}}%
+	\ifstrempty{#1}{%
+		\ifstrempty{#3}{}{#3:}%
+	}{%
+		#1\ifstrempty{#3}{:}{ (#3):}%
+	}%
+}
+
+%====================================================%
+
+% declaración de entornos con contador unificado
+
+% 'defin' actúa como contador maestro ligado al capítulo, todos los demás entornos comparten el contador de 'defin'
+\theoremstyle{TrianguloSolido}
+\newtheorem{defin}{\nametheoremdefinition}[chapter]
+\newtheorem{ques}[defin]{\nametheoremquestion}
+\newtheorem{prob}[defin]{\nametheoremproblem}
+\newtheorem{prop}[defin]{\nametheoremproposition}
+\newtheorem{sol}[defin]{\nametheoremsolution}
+\newtheorem{coment}[defin]{\nametheoremcomment}
+\newtheorem{lem}[defin]{\nametheoremlemma}
+\newtheorem{teo}[defin]{\nametheoremtheorem}
+\newtheorem{cor}[defin]{\nametheoremcorollary}
+
+\theoremstyle{TrianguloHueco}
+\newtheorem{subdefin}[defin]{\nametheoremdefinition}
+\newtheorem{subques}[defin]{\nametheoremquestion}
+\newtheorem{subprob}[defin]{\nametheoremproblem}
+\newtheorem{subprop}[defin]{\nametheoremproposition}
+\newtheorem{subsol}[defin]{\nametheoremsolution}
+\newtheorem{subcoment}[defin]{\nametheoremcomment}
+\newtheorem{sublem}[defin]{\nametheoremlemma}
+\newtheorem{subteo}[defin]{\nametheoremtheorem}
+\newtheorem{subcor}[defin]{\nametheoremcorollary}
+
+\theoremstyle{RomboSolido}
+\newtheorem{minidefin}[defin]{\nametheoremdefinition}
+\newtheorem{miniques}[defin]{\nametheoremquestion}
+\newtheorem{miniprob}[defin]{\nametheoremproblem}
+\newtheorem{miniprop}[defin]{\nametheoremproposition}
+\newtheorem{minisol}[defin]{\nametheoremsolution}
+\newtheorem{minicoment}[defin]{\nametheoremcomment}
+\newtheorem{minilem}[defin]{\nametheoremlemma}
+\newtheorem{miniteo}[defin]{\nametheoremtheorem}
+\newtheorem{minicor}[defin]{\nametheoremcorollary}
+
+\theoremstyle{RomboHueco}
+\newtheorem{subminidefin}[defin]{\nametheoremdefinition}
+\newtheorem{subminiques}[defin]{\nametheoremquestion}
+\newtheorem{subminiprob}[defin]{\nametheoremproblem}
+\newtheorem{subminiprop}[defin]{\nametheoremproposition}
+\newtheorem{subminisol}[defin]{\nametheoremsolution}
+\newtheorem{subminicoment}[defin]{\nametheoremcomment}
+\newtheorem{subminilem}[defin]{\nametheoremlemma}
+\newtheorem{subminiteo}[defin]{\nametheoremtheorem}
+\newtheorem{subminicor}[defin]{\nametheoremcorollary}
+
+% entornos manuales (sin numeración)
+\theoremstyle{TrianguloSolidoManual}
+\newtheorem*{definless}{\nametheoremdefinition}
+\newtheorem*{quesless}{\nametheoremquestion}
+\newtheorem*{probless}{\nametheoremproblem}
+\newtheorem*{propless}{\nametheoremproposition}
+\newtheorem*{solless}{\nametheoremsolution}
+\newtheorem*{comentless}{\nametheoremcomment}
+\newtheorem*{lemless}{\nametheoremlemma}
+\newtheorem*{teoless}{\nametheoremtheorem}
+\newtheorem*{corless}{\nametheoremcorollary}
+
+\theoremstyle{TrianguloHuecoManual}
+\newtheorem*{subdefinless}{\nametheoremdefinition}
+\newtheorem*{subquesless}{\nametheoremquestion}
+\newtheorem*{subprobless}{\nametheoremproblem}
+\newtheorem*{subpropless}{\nametheoremproposition}
+\newtheorem*{subsolless}{\nametheoremsolution}
+\newtheorem*{subcomentless}{\nametheoremcomment}
+\newtheorem*{sublemless}{\nametheoremlemma}
+\newtheorem*{subteoless}{\nametheoremtheorem}
+\newtheorem*{subcorless}{\nametheoremcorollary}
+
+\theoremstyle{RomboSolidoManual}
+\newtheorem*{minidefinless}{\nametheoremdefinition}
+\newtheorem*{miniquesless}{\nametheoremquestion}
+\newtheorem*{miniprobless}{\nametheoremproblem}
+\newtheorem*{minipropless}{\nametheoremproposition}
+\newtheorem*{minisolless}{\nametheoremsolution}
+\newtheorem*{minicomentless}{\nametheoremcomment}
+\newtheorem*{minilemless}{\nametheoremlemma}
+\newtheorem*{miniteoless}{\nametheoremtheorem}
+\newtheorem*{minicorless}{\nametheoremcorollary}
+
+\theoremstyle{RomboHuecoManual}
+\newtheorem*{subminidefinless}{\nametheoremdefinition}
+\newtheorem*{subminiquesless}{\nametheoremquestion}
+\newtheorem*{subminiprobless}{\nametheoremproblem}
+\newtheorem*{subminipropless}{\nametheoremproposition}
+\newtheorem*{subminisolless}{\nametheoremsolution}
+\newtheorem*{subminicomentless}{\nametheoremcomment}
+\newtheorem*{subminilemless}{\nametheoremlemma}
+\newtheorem*{subminiteoless}{\nametheoremtheorem}
+\newtheorem*{subminicorless}{\nametheoremcorollary}
+
+% entornos comodín
+\theoremstyle{TrianguloSolidoManual}
+\newtheorem*{bloque}{}
+\theoremstyle{TrianguloHuecoManual}
+\newtheorem*{subbloque}{}
+\theoremstyle{RomboSolidoManual}
+\newtheorem*{minibloque}{}
+\theoremstyle{RomboHuecoManual}
+\newtheorem*{subminibloque}{}
+
+%====================================================%
+
+% aplicación del qed automático
+\forcsvlist{\addmarginqed}{%
+	defin,ques,prob,prop,sol,coment,lem,teo,cor,%
+	definless,quesless,probless,propless,solless,comentless,lemless,teoless,corless,%
+	bloque%
+}
+
+\forcsvlist{\addmarginqedhollow}{%
+	subdefin,subques,subprob,subprop,subsol,subcoment,sublem,subteo,subcor,%
+	subdefinless,subquesless,subprobless,subpropless,subsolless,subcomentless,sublemless,subteoless,subcorless,%
+	subbloque%
+}
+
+\forcsvlist{\addlistfix}{%
+	minidefin,miniques,miniprob,miniprop,minisol,minicoment,minilem,miniteo,minicor,%
+	minidefinless,miniquesless,miniprobless,minipropless,minisolless,minicomentless,minilemless,miniteoless,minicorless,%
+	minibloque,%
+	subminidefin,subminiques,subminiprob,subminiprop,subminisol,subminicoment,subminilem,subminiteo,subminicor,%
+	subminidefinless,subminiquesless,subminiprobless,subminipropless,subminisolless,subminicomentless,subminilemless,subminiteoless,subminicorless,%
+	subminibloque,%
+	bloque,subbloque%
+}
+
+%====================================================%
+
+% comandos para subsecciones alineados al contador unificado
+\newcommand{\sublogicnum}[2]{%
+\refstepcounter{defin}%
+\subsubsection{#1\ \thedefin\ifstrempty{#2}{}{ (#2)}}%
+}
+\newcommand{\sublogicless}[2]{%
+\subsubsection{#1\ifstrempty{#2}{}{ #2}}%
+}
+
+\newcommand{\subsectiondefin}[1][]{\sublogicnum{\nametheoremdefinition}{#1}}
+\newcommand{\subsectiondefinless}[1][]{\sublogicless{\nametheoremdefinition}{#1}}
+\newcommand{\subsectionques}[1][]{\sublogicnum{\nametheoremquestion}{#1}}
+\newcommand{\subsectionquesless}[1][]{\sublogicless{\nametheoremquestion}{#1}}
+\newcommand{\subsectionprob}[1][]{\sublogicnum{\nametheoremproblem}{#1}}
+\newcommand{\subsectionprobless}[1][]{\sublogicless{\nametheoremproblem}{#1}}
+\newcommand{\subsectionprop}[1][]{\sublogicnum{\nametheoremproposition}{#1}}
+\newcommand{\subsectionpropless}[1][]{\sublogicless{\nametheoremproposition}{#1}}
+\newcommand{\subsectionsol}[1][]{\sublogicnum{\nametheoremsolution}{#1}}
+\newcommand{\subsectionsolless}[1][]{\sublogicless{\nametheoremsolution}{#1}}
+\newcommand{\subsectioncoment}[1][]{\sublogicnum{\nametheoremcomment}{#1}}
+\newcommand{\subsectioncomentless}[1][]{\sublogicless{\nametheoremcomment}{#1}}
+\newcommand{\subsectionlem}[1][]{\sublogicnum{\nametheoremlemma}{#1}}
+\newcommand{\subsectionlemless}[1][]{\sublogicless{\nametheoremlemma}{#1}}
+\newcommand{\subsectionteo}[1][]{\sublogicnum{\nametheoremtheorem}{#1}}
+\newcommand{\subsectionteoless}[1][]{\sublogicless{\nametheoremtheorem}{#1}}
+\newcommand{\subsectioncor}[1][]{\sublogicnum{\nametheoremcorollary}{#1}}
+\newcommand{\subsectioncorless}[1][]{\sublogicless{\nametheoremcorollary}{#1}}
+
+%====================================================%
+
+% Macro auxiliar: define automáticamente box<nombre>1 y box<nombre>2
+\newcommand{\NewTheoremBox}[2]{%
+	% Serie 1: Marco amarillo (Y1)
+	\newtcolorbox{box#11}[1][]{%
+		base frame overlay=Y1,%
+		colframe=Y1,%
+		code={\refstepcounter{defin}},%
+		title={#2\ \thedefin\ifstrempty{##1}{}{ (##1)}}%
+	}%
+	% Serie 2: Marco dinámico según tema (\tcbTextColor)
+	\newtcolorbox{box#12}[1][]{%
+		base frame overlay=\tcbTextColor,%
+		colframe=\tcbTextColor,%
+		code={\refstepcounter{defin}},%
+		title={#2\ \thedefin\ifstrempty{##1}{}{ (##1)}}%
+	}%
+}
+
+\NewTheoremBox{defin}{\nametheoremdefinition}		%\begin{boxdefin1}, \begin{boxdefin2}
+\NewTheoremBox{ques}{\nametheoremquestion}
+\NewTheoremBox{prob}{\nametheoremproblem}
+\NewTheoremBox{prop}{\nametheoremproposition}
+\NewTheoremBox{sol}{\nametheoremsolution}
+\NewTheoremBox{coment}{\nametheoremcomment}
+\NewTheoremBox{lem}{\nametheoremlemma}
+\NewTheoremBox{teo}{\nametheoremtheorem}
+\NewTheoremBox{cor}{\nametheoremcorollary}

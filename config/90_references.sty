@@ -1,0 +1,25 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/90_references}[Comandos personalizados para referencias cruzadas, citas e hipervínculos]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics} % incluye hyperref
+\RequirePackage{config/05_symbols}
+
+%====================================================%
+
+% Citas manuales (Bibliografia manual)
+\newcommand{\cit}[1]{\hyperlink{#1}{\color{C4}[#1]}}	% referir bibliografia manual
+\newcommand{\reference}[2]{[\hypertarget{#1}{#1}] #2}	% crear entrada en bibliografia manual
+
+%====================================================%
+
+% Referencia a capítulos/secciones numeradas (ej. § 2.1)
+\newcommand{\secref}[1]{\hyperref[#1]{\color{C2}\S\,\ref*{#1}}}
+\newcommand{\chaplessref}[1]{\hyperref[#1]{\color{C2}\S\,#1}}
+\newcommand{\seclessref}[1]{\hyperref[#1]{\color{C2}\dag\,#1}}
+\newcommand{\subseclessref}[1]{\hyperref[#1]{\color{C2}\ddag\,#1}}
+\newcommand{\nref}[1]{\hyperref[#1]{\color{C2}\P\,#1}}
+
+%====================================================%
+
+\newcommand{\link}[2]{\href{#1}{\color{C3}\textsl{#2}}}

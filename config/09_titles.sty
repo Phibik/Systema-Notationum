@@ -1,0 +1,137 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/09_titles}[Formato y diseño de títulos de capítulo y secciones]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/02_basics}
+\RequirePackage{config/03_typography}
+\RequirePackage{config/06_tikz}
+\RequirePackage{config/08_header_footnote}
+
+\RequirePackage[explicit]{titlesec}
+
+%====================================================%
+
+% Part
+\newcommand{\parttitle}[4]{%
+	\begin{center}%
+		\fsize{40}\textbf{\thepart}\\
+		\vspace{0.5\baselineskip}
+		\thispagestyle{empty}
+		\centering\fsize{40}\textsc{#4}
+	\end{center}%
+}
+
+%====================================================%
+
+% Chapter dark theme
+\ifdefstring{\docstyle}{dark}
+{
+	\newcommand{\chaptertitle}[4]{%
+		\setstretch{2.75}%
+		\begin{center}
+			\begin{tikzpicture}
+				\node (reference) at (7.5,0) {};
+				\node (title) [above=15pt of reference, text width=\textwidth, align=center]{%
+					\begin{center}\color{white}\textbf{\fsize{40pt}#4}\end{center}%
+				};
+				\node (titlenum) [below=0pt of title] {%
+					\centering
+					\begin{tikzpicture}
+						\filldraw[color=Y1, ultra thick](-6.1,0.1)--(-5.8,-0.2)--(-4.3,-0.2)--(-4.5,0.1);
+						\filldraw[color=Y1, ultra thick](6.1,0.1)--(5.8,-0.2)--(4.3,-0.2)--(4.5,0.1);
+						\filldraw[color=WB12, ultra thick](-4.3,0.4)--(-3.3,0.4)--(-3,0.1)--(-4,0.1);
+						\filldraw[color=WB12, ultra thick](4.3,0.4)--(3.3,0.4)--(3,0.1)--(4,0.1);
+						\fill[color=WB6, ultra thick](-4.3,-0.3)--(-4.7,0.1)--(-6.6,0.1)--(-7,0.5)--(-4.4,0.5)--(-4.1,0.2)--(-2.1,0.2)--(-2,0.3)--(0,0.3)--(2,0.3)--(2.1,0.2)--(4.1,0.2)--(4.4,0.5)--(7,0.5)--(6.6,0.1)--(4.7,0.1)--(4.3,-0.3)--(3,-0.3)--(2.7,-0.6)--(1.5,-0.6)--(1.3,-0.8)--(-1.3,-0.8)--(-1.5,-0.6)--(-2.7,-0.6)--(-3,-0.3)--(-4.3,-0.3)--(-4.7,0.1);
+						\draw[color=WB28, ultra thick](-4.3,-0.3)--(-4.7,0.1)--(-6.6,0.1)--(-7,0.5)--(-4.4,0.5)--(-4.1,0.2)--(-2.1,0.2)--(-2,0.3)--(0,0.3)--(2,0.3)--(2.1,0.2)--(4.1,0.2)--(4.4,0.5)--(7,0.5)--(6.6,0.1)--(4.7,0.1)--(4.3,-0.3)--(3,-0.3)--(2.7,-0.6)--(1.5,-0.6)--(-1.5,-0.6)--(-2.7,-0.6)--(-3,-0.3)--(-4.3,-0.3)--(-4.7,0.1);
+						\fill[color=WB4, ultra thick](0,0.1)--(-1.6,0.1)--(-1.7,0)--(-2,0)--(-1.8,-0.2)--(-1.5,-0.2)--(-0.8,-0.9)--(0.8,-0.9)--(1.5,-0.2)--(1.8,-0.2)--(2,0)--(1.7,0)--(1.6,0.1)--(0,0.1);
+						\draw[color=WB28, ultra thick](0,0.1)--(-1.6,0.1)--(-1.7,0)--(-2,0)--(-1.8,-0.2)--(-1.5,-0.2)--(-0.8,-0.9)--(0.8,-0.9)--(1.5,-0.2)--(1.8,-0.2)--(2,0)--(1.7,0)--(1.6,0.1)--(0,0.1);
+						\node(0,0.2){\color{R1}\textbf{\fsize{25pt}\thechapter}};
+					\end{tikzpicture}%
+				};
+			\end{tikzpicture}
+		\end{center}\setstretch{1}%
+	}
+	
+	\newcommand{\chapterlesstitle}[4]{%
+		\setstretch{2.75}%
+		\begin{center}
+			\begin{tikzpicture}
+				\node (reference) at (7.5,0) {};
+				\node (title) [above=15pt of reference, text width=\textwidth, align=center]{%
+					\begin{center}\color{white}\textbf{\fsize{40pt}#4}\end{center}%
+				};
+				\node (titlenum) [below=0pt of title] {%
+					\centering
+					\begin{tikzpicture}
+						\filldraw[color=Y1, ultra thick](-6.1,0.1)--(-5.8,-0.2)--(-4.3,-0.2)--(-4.5,0.1);
+						\filldraw[color=Y1, ultra thick](6.1,0.1)--(5.8,-0.2)--(4.3,-0.2)--(4.5,0.1);
+						\filldraw[color=WB12, ultra thick](-4.3,0.4)--(-3.3,0.4)--(-3,0.1)--(-4,0.1);
+						\filldraw[color=WB12, ultra thick](4.3,0.4)--(3.3,0.4)--(3,0.1)--(4,0.1);
+						\fill[color=WB6, ultra thick](-4.3,-0.3)--(-4.7,0.1)--(-6.6,0.1)--(-7,0.5)--(-4.4,0.5)--(-4,0.1)--(-2.1,0.1)--(-2,0.2)--(0,0.2)--(2,0.2)--(2.1,0.1)--(4,0.1)--(4.4,0.5)--(7,0.5)--(6.6,0.1)--(4.7,0.1)--(4.3,-0.3)--(3,-0.3)--(2.7,-0.6)--(1.5,-0.6)--(1.3,-0.8)--(-1.3,-0.8)--(-1.5,-0.6)--(-2.7,-0.6)--(-3,-0.3)--(-4.3,-0.3)--(-4.7,0.1);
+						\draw[color=WB28, ultra thick](-4.3,-0.3)--(-4.7,0.1)--(-6.6,0.1)--(-7,0.5)--(-4.4,0.5)--(-4,0.1)--(-2.1,0.1)--(-2,0.2)--(0,0.2)--(2,0.2)--(2.1,0.1)--(4,0.1)--(4.4,0.5)--(7,0.5)--(6.6,0.1)--(4.7,0.1)--(4.3,-0.3)--(3,-0.3)--(2.7,-0.6)--(1.5,-0.6)--(1.3,-0.8)--(-1.3,-0.8)--(-1.5,-0.6)--(-2.7,-0.6)--(-3,-0.3)--(-4.3,-0.3)--(-4.7,0.1);
+						\filldraw[color=R1, ultra thick, rounded corners=1pt](0,-0.2)--(-2,-0.2)--(-2,-0.25)--(2,-0.25)--(2,-0.2)--(0,-0.2);
+						\fill[color=R1, ultra thick](0,-0.2)--(-1.3,-0.2)--(-1.05,-0.45)--(1.05,-0.45)--(1.3,-0.2)--(0,-0.2);
+					\end{tikzpicture}%
+				};
+			\end{tikzpicture}
+		\end{center}\setstretch{1}%
+	}
+}
+
+%====================================================%
+
+% Chapter formal theme
+\ifdefstring{\docstyle}{formal}
+{
+
+}
+
+%====================================================%
+
+\titleformat{\part}[block]
+{\normalfont}{}{0.75em}{\parttitle{east}{west}{0\paperwidth}{#1}}
+
+\titleformat{\chapter}[block]
+{\normalfont}{}{0.75em}{\chaptertitle{east}{west}{0\paperwidth}{#1}}
+
+\titleformat{name=\chapter,numberless}[block]
+{\normalfont}{}{0em}{\chapterlesstitle{east}{west}{0\paperwidth}{#1}}[]
+
+% chapter spacing
+\titlespacing*{name=\chapter,numberless}{0pt}{-130pt}{-15pt} 
+\titlespacing*{\chapter}{0pt}{-130pt}{-15pt}
+
+%====================================================%
+
+\ifdefstring{\docstyle}{dark}
+{
+	\titleformat{\section}[block]
+	{\normalfont\Large\bfseries}{\color{R4}\thesection}{0.75em}{\color{R4}\Large #1}
+	
+	\titleformat{\subsection}[block]
+	{\normalfont\large\bfseries}{\color{R3}\thesubsection}{0.75em}{\color{R3}\large #1}
+	
+	\titleformat{\subsubsection}[block]
+	{\normalfont\bfseries}{}{0.75em}{\color{R2}#1}
+	
+	\titleformat{name=\section,numberless}[block]
+	{\color{R4}\normalfont\Large\bfseries}{}{0em}{#1}
+	
+	\titleformat{name=\subsection,numberless}[block]
+	{\color{R3}\normalfont\large\bfseries}{}{0em}{#1}
+}{}
+\ifdefstring{\docstyle}{formal}
+{
+
+}{}
+
+%====================================================%
+
+% Remapeos
+\newcommand{\pars}[1]{\part{#1}\markboth{}{}\fancyhead[R]{\bfseries\thepart. #1}} % NO FER PARTS SEGUIDES SENSE CAPITOLS
+\newcommand{\chap}[1]{\chapter{#1}\fancyhead[R]{\bf{\thechapter. \leftmark}}}
+
+\newcommand{\chapless}[1]{\chapter*{#1}\fancyhead[R]{\bf{#1}}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\sectionless}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+\newcommand{\subsectionless}[1]{\subsection*{#1}}
+\newcommand{\subsubsectionless}[1]{\subsubsection{#1}}

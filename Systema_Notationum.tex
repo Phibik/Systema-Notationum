@@ -1,0 +1,250 @@
+\documentclass[12pt]{report}
+
+% ==============================================================================
+% CONFIGURACIÓN DEL DOCUMENTO Y METADATOS (Ajusta aquí tus preferencias)
+% ==============================================================================
+
+% Selección de estilo y lengua
+\newcommand{\docstyle}{dark}       % Opciones: dark, formal
+\newcommand{\doclanguage}{es}      % Opciones: la, ca, es, en
+
+% Información básica del documento, usar \textquotesingle per '
+\newcommand{\titlename}{Systema Notationum}
+\newcommand{\authorname}{Martí Figverola Giner}
+\newcommand{\subtitle}{-}
+\newcommand{\sdate}{Mayo 2026}
+\newcommand{\pdate}{-}
+\newcommand{\titleheader}{\titlename\ }
+
+% Profundidad del TOC (table of contents)
+\setcounter{tocdepth}{1}		% 0 = Chapter, 1 = Section, 2 = Subsection, 3 = Subsubsection
+
+% ==============================================================================
+% CARGA DE MÓDULOS DE CONFIGURACIÓN (En orden estricto de dependencias)
+% ==============================================================================
+\usepackage{config/01_colors}       			% Paleta de colores RGB
+\usepackage{config/02_basics}       			% Márgenes, parskip, enumitem, hipervínculos
+\usepackage{config/03_typography}   			% Fuentes, Polyglossia, lengua e IPA           % AQUÍ POT PETAR, CONSULTA L'ARXIU typography
+\usepackage{config/04_math}         			% Paquetes base matemáticos
+\usepackage{config/05_symbols}      			% Símbolos personalizados y atajos
+\usepackage{config/06_tikz}         			% TikZ, CircuiTikZ y entornos fig/graph/circuit
+\usepackage{config/07_toc}       				% Títulos de partes, capítulos y secciones
+\usepackage{config/08_header_footnote}      	% Encabezados (fancyhdr) y reglas superiores TikZ
+\usepackage{config/09_titles}    				% Pie de página, notas al pie y color global
+\usepackage{config/10_tables}       			% Formato de tablas y celdas
+\usepackage{config/11_tcolorbox}    			% Estilo base de cajas tcolorbox
+\usepackage{config/12_theorem_environments}     % Entornos: definición, teorema, ejemplo...
+\usepackage{config/13_code}         			% Bloques de código fuente
+\usepackage{config/90_references}   			% Formato de referencias cruzadas
+\usepackage{config/91_bibliography} 			% Fuentes y bibliografía
+\usepackage{config/99_language}     			% Selección e internacionalización del idioma
+
+% ==============================================================================
+% COMANDOS ESPECÍFICOS DE ESTE DOCUMENTO
+% ==============================================================================
+
+
+
+% ==============================================================================
+% CUERPO DEL DOCUMENTO
+% ==============================================================================
+
+\begin{document}
+	
+	\firstpage{60}	% tamaño texto
+	
+	\chapless{Praefātiō}
+	
+	Auctor operis cuj titulus est \textit{\titlename}, Mārtīnus Fīgherōla Giner, Catalānicē Martí Figuerola Giner Sicart Sobrepera Esquius Garcia Corberó Bosch [m\textturna\textfishhookr'\textsubbridge{t}i fi.\textlowering{\textgamma}\textlowering{e}'\textfishhookr\textlowering{o}.\textltilde ä \textyogh i'ne \textsubbar{s}i'kä\textfishhookr\textsubbridge{t} \textsubbar{s}\textlowering{o}.\textlowering{\textbeta}\textfishhookr \textlowering{e}'p\textlowering{e}.\textfishhookr ä \textturna \textsubbar{s}'kiw\textsubbar{s} g\textturna\textfishhookr'\textsubbar{s}i.\textturna\ k\textlowering{o}\textfishhookr.\textlowering{\textbeta}\textlowering{e}'\textfishhookr\textlowering{o} 'b\textopeno \textsubbar{s}k], Barcinōne in Hispāniā diē decimō mēnsis Augustī annō bis mīllēsimō quīntō circā hōram quīntam decimam nātus, sōlus et prīncipālis est auctor tōtīus textūs. Quīcumque error in textū invenītur, ad sōlum auctōrem pertinet ejusque est tōta rēspōnsābitās; quī, quandōcumque fierī potest, nōtificandus est.
+	
+	\addtoc
+	
+	\chap{Introducción}
+	
+	\section{Objetivo}
+	Se presenta un sistema de metanotación para dar forma a cualquier escrito que exponga cualquier tema.
+	
+	\section{Lenguajes}
+
+	
+	
+	\chap{Hiperlenguaje}
+	
+	Primero es preciso aclarar términos básicos, luego se definirán conceptos nuevos de este texto, los hiperlenguajes y los hiperlenguajes figuerolianos.
+	
+	\begin{minibloque}[Definiciones]
+		\begin{itemize}
+			\item \textbf{Lenguaje: }Es un sistema de comunicación organizado.
+			\item \textbf{Metalenguaje: }Es un lenguaje que se usa para hablar acerca de otro lenguaje.
+			\item \textbf{Lenguaje Objeto: }Es un lenguaje descrito por un metalenguaje.
+			\item \textbf{Lengua: }Es un lenguaje humano, pueden ser naturales o artificiales/construidas.
+		\end{itemize}
+	\end{minibloque}
+	
+	\begin{minidefin}
+		Un hiperlenguaje es el metalenguaje fundamental que da estructura a un texto y describe sus conceptos.
+	\end{minidefin}
+	
+	Para exponer cualquier tema al lector, se requiere siempre de una lengua conductora (generalmente una lengua natural, como el español) que sirva de guía. En este contexto, la lengua en la que se redacta el texto equivale al metalenguaje del propio tema, es el marco que permite formalizar y describir otras disciplinas. A esta estructura lingüística global la denominamos hiperlenguaje.
+	
+	La clave a destacar es que todo tema o concepto puede modelarse formalmente como un lenguaje propio, dotado de su correspondiente ortografía, sintaxis y semántica, aunque esta misma sea casi una copia del hiperlenguaje (como la filosofía o el derecho).
+	
+	\begin{subminibloque}[Ejemplos]
+		\begin{itemize}
+			\item \textbf{Matemáticas:} 
+			El hiperlenguaje articula la explicación teórica y define los términos y símbolos metalingüísticamente, especialmente en lógica matemática para dar significado a expresiones de lógica de primer orden y demostrar metateoremas\footnote{Un metateorema es una proposición verdadera que se demuestra con el metalenguaje, no dentro del propio sistema formal definido matemáticamente, como el (meta-)teorema de la deducción.}.
+			
+			\item \textbf{Filosofía y Derecho:} 
+			La ortografía y la sintaxis del tema son idénticas a las de los hiperlenguajes estándares (lenguas naturales). Sin embargo, el lenguaje del tema redefine la semántica asignando significados técnicos rigurosos a palabras comunes («ente», «jurisprudencia»...).
+		\end{itemize}
+	\end{subminibloque}
+
+	
+	
+	
+	\section{Hiperlenguajes Figuerolianos}
+	
+	Ahora es conveniente definir un conjunto de hiperlenguajes que se ajusten elegantemente a las necesidades de un texto, y que todos estos hiperlenguajes compartan un léxico y una sintaxis simbólica común. Para eso es necesario reemplazar y expandir los signos de puntuación de las lenguas que forman dichos hiperlenguajes.
+	
+	\begin{minidefin}
+		Un hiperlenguaje figueroliano se compone de una lengua virgen (sin sus signos de puntuación propios) y de los hipersímbolos figuerolianos.
+	\end{minidefin}
+
+	\begin{tab}{2}{|+c|-C|}{Signo & Significado}
+		\textnoto{◌} & Marca un argumento \\\hline
+		$\cdots$ & Marca continuación o elipsis \\\hline
+		\guilsinglleft\textnoto{◌}\guilsinglright & Citar \\\hline
+		\guillemotleft\textnoto{◌}\guillemotright & Delimita un lenguaje y queda prohibido el uso en otros lenguajes \\\hline
+		\textquotedblleft\textnoto{◌}\textquotedblright & Delimita un lenguaje como lenguaje objeto \\\hline
+		\textquoteleft\textnoto{◌}\textquoteright & Delimita un lenguaje como metalenguaje \\\hline
+		(\textnoto{◌}) & Comentario \\\hline
+		$\llparenthesis$\textnoto{◌}$\rrparenthesis$ & Fonética \\\hline
+		[\textnoto{◌}] & Adiciones para aclarar citas \\\hline
+		$[$\textnoto{◌}$]$ & Representacion alternativa \\\hline
+		$\llbracket$\textnoto{◌}$\rrbracket$ & Destacar \\\hline
+		$\lfloor$\textnoto{◌}$\rfloor$ & Referencia \\\hline
+		$\lceil$\textnoto{◌}$\rceil$ & Citas tal cual \\\hline
+		$\llfloor$\textnoto{◌}$\rrfloor$ & Citas parafraseadas \\\hline
+		$\llceil$\textnoto{◌}$\rrceil$ & Contexto o marco general \\\hline
+		\textlangle\textnoto{◌}\textrangle & Enlace o localizador \\\hline
+		$\ulcorner$\textnoto{◌}$\urcorner$ & Formalización estricta \\\hline
+		$\llcorner$\textnoto{◌}$\lrcorner$ & Nota técnica al margen \\\hline
+		\textlquill\textnoto{◌}\textrquill & Traducción literal \\\hline
+	\end{tab}
+	
+	
+	
+	\chap{Lenguaje Matemático}
+	\section{Fórmulas}
+	
+	Las fórmulas proposicionales se componen por 3 elementos distintos:
+	\begin{e1}
+		\item Variables: $p_1, p_2, p_3...$
+		\item Connectores: $¬, \wedge, \vee, \oplus, \to, \leftrightarrow$
+		\item Paréntesis: $(, )$
+	\end{e1}
+	
+	\begin{defin}
+		Una \textbf{fórmula proposicional} se define inductivamente:
+		\begin{ne1}
+			\item $\forall i\in\mathbb{Z}_{\ge 0}, p_i$.
+			\item Siendo $A$ una fórmula proposicional, $¬A$ también lo es.
+			\item Siendo $A$ i $B$ fórmulas proposicionales, $A\otimes B$ también lo es para cualquier connector $\otimes$.
+		\end{ne1}
+	\end{defin}
+	
+	\begin{defin}
+		Una fórmula $\varphi$ es \textbf{valida} o \textbf{tautológica} si $\vDash \phi$.
+	\end{defin}
+	\begin{defin}
+		Una fórmula $\varphi$ es \textbf{demostrable} si $\vdash \phi$.
+	\end{defin}
+	
+	
+	
+	
+	
+	
+	
+	
+	\chap{Sagittulae Fīgherōliānae}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\chap{Signa Fīgherōliāna}
+	
+	
+	
+	
+	
+	
+	
+	
+	\chapless{Glossary}
+	
+	\section*{List of Symbols}
+	%	\begin{xltabular}{\textwidth}{lcX}
+		%		$x$ \glsarrow Position (\siless{\metre})\\
+		%		$t$ \glsarrow Time (\siless{\second})\\
+		%		$v$ \glsarrow Velocity (\siless{\metre/\second})\\
+		%		$a$ \glsarrow Acceleration (\siless{\metre/\second^2})\\
+		%		$m$ \glsarrow Mass (\siless{\kilo\gram})\\
+		%		$E$ \glsarrow Energy (\siless{\joule})\\
+		%		$F$ \glsarrow Force (\siless{\newton})\\
+		%		$v_s$ \glsarrow Velocity of sound (343\si{\metre/\second})\\
+		%		$v_l$ \glsarrow Velocity of light ($3\cdot10^8$\si{\metre/\second})
+		%	\end{xltabular}
+	
+	\section*{List of Figures}
+	
+	
+	\section*{List of Tables}
+	
+	
+	\section*{List of Codes}
+	
+	\section*{Acronyms}
+	\begin{xltabular}{\textwidth}{lcX}
+		IPA \glsarrow International Phonetic Alphabet\\
+		FIPA \glsarrow Figuerola International Phonetic Alphabet\\
+		FIPAS \glsarrow Figuerola International Phonetic Alphabet Simplified\\
+		FIPAM \glsarrow Figuerola International Phonetic Alphabet Modified\\
+		FIPAX \glsarrow Figuerola International Phonetic Alphabet Extra
+	\end{xltabular}
+	
+	\section*{Terms}
+	\renewcommand{\arraystretch}{1.5}
+	\begin{xltabular}{\textwidth}{lcX}
+		IPA \glsarrow International Phonetic Alphabet\\
+		FIPA \glsarrow Figuerola International Phonetic Alphabet a lot of texxxxxxxxxxt for youuuuuuu sdjflasdf odsjf lasd jd \\
+		FIPAS \glsarrow Figuerola International Phonetic Alphabet Simplified\\
+		FIPAM \glsarrow Figuerola International Phonetic Alphabet Modified\\
+		IPA \glsarrow International Phonetic Alphabet\\
+		FIPA \glsarrow Figuerola International Phonetic Alphabet a lot of texxxxxxxxxxt for youuuuuuu sdjflasdf odsjf lasd jd \\
+		FIPAS \glsarrow Figuerola International Phonetic Alphabet Simplified\\
+		FIPAM \glsarrow Figuerola International Phonetic Alphabet Modified\\
+		IPA \glsarrow International Phonetic Alphabet\\
+		FIPA \glsarrow Figuerola International Phonetic Alphabet a lot of texxxxxxxxxxt for youuuuuuu sdjflasdf odsjf lasd jd \\
+		FIPAS \glsarrow Figuerola International Phonetic Alphabet Simplified\\
+		FIPAM \glsarrow Figuerola International Phonetic Alphabet Modified\\
+		FIPAX \glsarrow Figuerola International Phonetic Alphabet Extra
+	\end{xltabular}
+	\renewcommand{\arraystretch}{1}
+	
+	\renewcommand\bibname{References}
+	\bibliographystyle{unsrtnat}
+	\bibliography{References}
+	\addcontentsline{toc}{chapter}{References}
+	
+	% google scholar > cite > BibTeX
+	
+	
+	\lastpage{1} 	% 0 --> no comercial, 1 --> sí comercial
+
+\end{document}

@@ -1,0 +1,100 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/04_math}[Paquetes de matemáticas y remapeos de cálculo]
+
+% Carga de paquetes matemáticos fundamentales
+\RequirePackage{amsmath, amssymb, amsthm, amsfonts, mathtools} 		% math symbols
+\RequirePackage{centernot} 											% centers not in large symbols \centernot \largeSymbol
+\RequirePackage{cancel} 											% \cancel{} \bcancel{} \xcancel{} \cancelto{}{}
+\RequirePackage[intlimits]{esint} 									% more integrals
+\RequirePackage[llbracket, rrbracket]{stmaryrd}						% more brackets
+\RequirePackage{witharrows}											% align with arrows
+
+%====================================================%
+
+% Símbolos base de diferenciales
+\newcommand{\dd}{\mathrm{d}}                                             % Diferencial recta
+\newcommand{\pd}{\partial}                                               % Derivada parcial
+
+% Derivadas rápidas
+\newcommand{\dx}{\dd x}
+\newcommand{\dy}{\dd y}
+\newcommand{\dz}{\dd z}
+\newcommand{\ds}{\dd s}
+\newcommand{\dt}{\dd t}
+
+% Derivadas totales (usamos \difrac porque \dfrac pertenece a amsmath)
+\newcommand{\ddfrac}[2]{\frac{\dd #1}{\dd #2}}                           % Derivada
+\newcommand{\ddfracn}[3]{\frac{\dd^{#3} #1}{\dd #2^{#3}}}          		 % Derivada n-ésima
+
+% Derivadas parciales
+\newcommand{\pdfrac}[2]{\frac{\pd #1}{\pd #2}}                           % Parcial
+\newcommand{\pdfracn}[3]{\frac{\pd^{#3} #1}{\pd #2^{#3}}}    	         % Parcial n-ésima
+
+%====================================================%
+
+% math bold italic, junt amb \mathbf, \mathrm, \mathbb, \mathcal, \mathfrak{}, \mathtt{}
+\def\mathbi#1{\textbf{\em #1}}								  % \mathbi{}
+
+% Conjuntos numéricos (doble barra)
+\newcommand{\N}{\mathbb{N}}                                   % Naturales
+\newcommand{\Z}{\mathbb{Z}}                                   % Enteros
+\newcommand{\Q}{\mathbb{Q}}                                   % Racionales
+\newcommand{\R}{\mathbb{R}}                                   % Reales
+\newcommand{\C}{\mathbb{C}}                                   % Complejos
+
+% Flechas y conectores lógicos frecuentes
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\La}{\Leftarrow}
+\newcommand{\Lra}{\Leftrightarrow}
+\newcommand{\lra}{\leftrightarrow}
+
+% Operadores
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\dm}{Dm}
+\DeclareMathOperator{\rg}{Rg}
+
+% Varios
+\providecommand{\degree}{^\circ}
+\newcommand{\cnot}[1]{\centernot{#1}}
+\newcommand\aug{\fboxsep=-\fboxrule\!\!\!\fbox{\strut}\!\!\!} % Matriz aumentada
+\let\oldcancelto\cancelto                                       % Invierte los argumentos de \cancelto
+\renewcommand{\cancelto}[2]{\oldcancelto{#2}{#1}}
+
+% Operadores grandes personalizados
+\makeatletter
+\newcommand{\bigfrac}{\DOTSB\mathop{\mathpalette\bigfrac@do\relax}\slimits@}
+\newcommand\bigfrac@do[2]{\vcenter{\hbox{\sbox\z@{$#1\sum$}\resizebox{!}{0.9\dimexpr\ht\z@+\dp\z@}{\raisebox{\depth}{$\m@th#1\mathcal{K}$}}}}\vphantom{\sum}}
+
+\newcommand{\bigforall}{\DOTSB\mathop{\mathpalette\bigforall@do\relax}\slimits@}
+\newcommand\bigforall@do[2]{\vcenter{\hbox{\sbox\z@{$#1\sum$}\resizebox{!}{0.9\dimexpr\ht\z@+\dp\z@}{\raisebox{\depth}{$\m@th#1\forall$}}}}\vphantom{\sum}}
+
+\newcommand{\bigexists}{\DOTSB\mathop{\mathpalette\bigexists@do\relax}\slimits@}
+\newcommand\bigexists@do[2]{\vcenter{\hbox{\sbox\z@{$#1\sum$}\resizebox{!}{0.9\dimexpr\ht\z@+\dp\z@}{\raisebox{\depth}{$\m@th#1\exists$}}}}\vphantom{\sum}}
+
+\newcommand{\bigbarwedge}{\DOTSB\mathop{\mathpalette\bigbarwedge@do\relax}\slimits@}
+\newcommand\bigbarwedge@do[2]{\vcenter{\hbox{\sbox\z@{$#1\sum$}\resizebox{!}{0.9\dimexpr\ht\z@+\dp\z@}{\raisebox{\depth}{$\m@th#1\overline{\bigwedge}$}}}}\vphantom{\sum}}
+
+\newcommand{\bigveebar}{\DOTSB\mathop{\mathpalette\bigveebar@do\relax}\slimits@}
+\newcommand\bigveebar@do[2]{\vcenter{\hbox{\sbox\z@{$#1\sum$}\resizebox{!}{0.9\dimexpr\ht\z@+\dp\z@}{\raisebox{\depth}{$\m@th#1\underline{\bigvee}$}}}}\vphantom{\sum}}
+\makeatother
+
+\newcommand{\bigop}[1]{\mathop{\vphantom{\sum}\mathchoice{\vcenter{\hbox{\huge$#1$}}}{\vcenter{\hbox{\Large$#1$}}}{#1}{#1}}\displaylimits}
+
+%====================================================%
+
+% Delimitadores
+\newcommand{\lb}{\llbracket}
+\newcommand{\rb}{\rrbracket}
+
+% Delimitadores auto-escalables con mathtools
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}                           % Valor absoluto
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}                          % Norma
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}                       % Función suelo
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}                          % Función techo
+\DeclarePairedDelimiter\braket{\langle}{\rangle}                      % Producto escalar / Bra-Ket

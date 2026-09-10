@@ -1,0 +1,71 @@
+% environments
+\newcommand{\nametheoremdefinition}{Definició}
+\newcommand{\nametheoremquestion}{Qüestió}
+\newcommand{\nametheoremproblem}{Problema}
+\newcommand{\nametheoremproposition}{Proposició}
+\newcommand{\nametheoremsolution}{Solució}
+\newcommand{\nametheoremcomment}{Comentari}
+\newcommand{\nametheoremlemma}{Lema}
+\newcommand{\nametheoremtheorem}{Teorema}
+\newcommand{\nametheoremcorollary}{Corolari}
+\renewcommand{\figurename}{Figura}
+
+% table of contents
+\newcommand{\titletoc}{Continguts}
+\newcommand{\addtoc}{\renewcommand{\contentsname}{\titletoc}\tableofcontents\fancyhead[R]{\bf{\titletoc}}}
+
+% title page
+\newcommand{\firstpage}[1]{
+	\begin{titlepage}
+		\newgeometry{top=115pt, bottom=100pt, right=100pt, left=100pt}
+		\centering
+		\begin{spacing}{3.75}
+			\textsc{\fsize{#1pt}\titlename}
+		\end{spacing}
+		\vspace{-50pt}
+		\rule{\textwidth}{2pt}\vspace*{-\baselineskip}\vspace{5pt} % Thin horizontal rule
+		\rule{0.75\textwidth}{0.5pt} % Thick horizontal rule
+		\vspace{0.75\baselineskip}\\
+		{\Large Per\\}
+		\vspace{0.5\baselineskip}
+		\textsc{\huge\noindent \authorname}
+		\vspace{1.5\baselineskip}\\
+		\begin{tabular}{p{12cm}}
+			\centering\textit{\large \subtitle}
+		\end{tabular}
+		\vfill
+		\includegraphics[scale=0.025]{LOGO_blanc.png}\\
+		\vspace{0.75\baselineskip}
+		\textsl{\large Publicat en \pdate}
+		\restoregeometry
+	\end{titlepage}
+}
+
+\newcommand{\lastpage}[1]{
+	\newpage
+	\thispagestyle{empty}
+	\fancyhead[R]{}
+	\fancyhead[C]{}
+	\fancyhead[L]{}
+	
+	\begin{center}
+		\fsize{35pt}{Escrit per Martí Figuerola}
+		\vspace{0.5\baselineskip}\\
+		\textit{\large `Sī vīs aliquid bene factum, bene fac'}
+		
+		\vfill
+		\includegraphics[scale=0.15]{images/LOGO_groc_1.png}
+		\vfill
+		
+		\textsl{\large Començat en \sdate}
+	\end{center}
+	\centering
+	% Mostrar la licencia dependiendo del argumento
+	\ifnum#1=1
+	\fsize{40pt}{\href{https://creativecommons.org/licenses/by-sa/4.0/}
+		{\ccLogo\:\:\ccAttribution\:\:\ccShareAlike}} % Commercial
+	\else
+	\fsize{40pt}{\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}
+		{\ccLogo\:\:\ccAttribution\:\:\ccNonCommercial\:\:\ccShareAlike}} % Non-commercial
+	\fi
+}

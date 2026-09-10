@@ -1,0 +1,77 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/02_basics}[Geometría, espaciados, listas y formatos básicos]
+
+% Carga de colores requeridos para los labels de las listas (Y1, Y2)
+\RequirePackage{config/01_colors}
+
+%====================================================%
+
+% Geometría y márgenes
+\RequirePackage[a4paper, lmargin=2.5cm, rmargin=2.5cm, tmargin=3cm, bmargin=3cm]{geometry}
+
+% Formato de pies de imagen/tabla
+\RequirePackage[skip=0.33\baselineskip, font=normalsize, labelfont=bf]{caption}
+
+%====================================================%
+
+\RequirePackage{etoolbox}
+
+\ifdefstring{\docstyle}{dark}
+{
+	\pagecolor{WB4}
+	\color{white}
+	
+	\definecolor{text_base_color}{RGB}{255,255,255}
+}{}
+\ifdefstring{\docstyle}{formal}
+{
+	\pagecolor{white}
+	\color{WB0}
+	
+	\definecolor{text_base_color}{RGB}{0,0,0}
+}{}
+
+%====================================================%
+
+% Espaciados de párrafo
+\RequirePackage{parskip}
+\setlength{\parskip}{10pt}
+\RequirePackage{setspace}
+\setlength{\parindent}{0cm}
+
+% Formato de texto y renderizado
+\RequirePackage{hyphenat}
+\RequirePackage[outline]{contour}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{anyfontsize}
+\RequirePackage{lipsum}
+
+% Utilidades varias
+\RequirePackage{xpatch}
+\RequirePackage{hhline}
+\RequirePackage{multicol}
+\RequirePackage{qrcode}
+\RequirePackage{svg}
+
+% images
+\usepackage{graphicx}
+\graphicspath{{./images/}} 		% \includegraphics[scale=0.04]{images/img.png}
+\usepackage{wrapfig} 			% \begin{wrapfigure}{r}{size} \includegraphics
+
+% Hipervínculos
+\RequirePackage[hidelinks, linktoc=all, hyperfootnotes=false]{hyperref}
+
+%====================================================%
+
+% Listas personalizadas
+\RequirePackage{enumitem}
+
+\newenvironment{e1}{\begin{enumerate}[label={\color{Y1}\Roman*.}, widest=III]}{\end{enumerate}}
+\newenvironment{e2}{\begin{enumerate}[label={\color{Y2}\roman*.}, widest=III]}{\end{enumerate}} 
+\newenvironment{ne1}{\begin{enumerate}[label=$\bullet$]}{\end{enumerate}}
+\newenvironment{ne2}{\begin{enumerate}[label=-]}{\end{enumerate}}
+
+%====================================================%
+
+\renewcommand{\indent}{\hspace{15pt}}
+

@@ -1,0 +1,91 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{13_code}[Configuración y entornos de código con listings y tcolorbox]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/06_tikz}
+\RequirePackage{config/11_tcolorbox} % incluye listings
+
+%====================================================%
+
+\lstset{
+	language=C++,
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\color{G1},
+	keywordstyle=\color{R1}\bfseries,
+	stringstyle=\color{Y1},
+	numberstyle=\tiny\color{W6},
+	numbers=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4
+}
+
+%====================================================%
+
+% Estilo base para bloques de código
+\tcbset{
+	codebox style/.style={
+		enhanced,
+		breakable,
+		center,
+		boxrule=0.5pt,
+		arc=2mm,
+		corner round spaces,
+		colback=\tcbBgColor,
+		colframe=\tcbTextColor!30!text1,
+		coltext=\tcbTextColor,
+		coltitle=\tcbTextColor,
+		fonttitle=\bfseries,
+		halign title=flush left,
+		listing only,
+		listing options={
+			basicstyle=\ttfamily\small,
+			commentstyle=\color{G1},
+			keywordstyle=\color{R1}\bfseries,
+			stringstyle=\color{Y1},
+			showstringspaces=false,
+			tabsize=4
+		}
+	}
+}
+
+% Entorno sin título: \begin{codec} ... \end{codec}
+\NewTCBListing{codec}{}{
+	codebox style
+}
+
+%====================================================%
+
+% Inline monocromo (texto plano en caja)
+\newcommand{\coding}[1]{%
+	\tcbox[
+	on line,
+	boxsep=1.5pt,
+	left=2pt, right=2pt, top=0pt, bottom=0pt,
+	colback=\tcbBgColor!90!text1,
+	colframe=\tcbTextColor!20!text1,
+	coltext=\tcbTextColor,
+	arc=0.5mm
+	]{\lstinline[keywordstyle=\color{\tcbTextColor}, stringstyle=\color{\tcbTextColor}]{#1}}%
+}
+
+% Inline con resaltado de sintaxis
+\newcommand{\codingc}[1]{%
+	\tcbox[
+	on line,
+	boxsep=1.5pt,
+	left=2pt, right=2pt, top=0pt, bottom=0pt,
+	colback=\tcbBgColor!90!text1,
+	colframe=\tcbTextColor!20!text1,
+	coltext=\tcbTextColor,
+	arc=0.5mm
+	]{\lstinline{#1}}%
+}
+
+% Ajuste de espaciado vertical global para tcolorbox
+\tcbsetforeverylayer{beforeafter skip balanced=1\baselineskip plus 2pt}

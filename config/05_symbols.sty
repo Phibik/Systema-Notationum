@@ -1,0 +1,65 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config/05_symbols}[Símbolos personalizados, conjuntos, iconos]
+
+\RequirePackage{config/01_colors}
+\RequirePackage{config/03_typography}
+
+% Dependencias básicas
+\RequirePackage{newunicodechar}
+\RequirePackage{textcomp}
+\RequirePackage{fontawesome}       	% Iconos (\faicon{...})
+\RequirePackage{worldflags}         % Banderas del mundo					% Correu en martixb.outlook parlant amb el desarrollador per arregls (bandera españa, monaco i una altre), hi ha una carpeta amb el paquet corregit sino mirar correu o yo que sé
+\RequirePackage{ccicons}            % Iconos Creative Commons
+\RequirePackage{marvosym}           % \EUR, lavado, reciclaje, etc.
+
+%====================================================%
+
+% Tally Marks (Marcas de recuento con literales PDF)
+\newcount\tmpnum
+\def\tallymarks#1{\leavevmode\lower1bp\vbox to9bp{}\tmpnum=#1\loop\ifnum\tmpnum<5\kern1bp\tallynum\tmpnum\else\tallyV\fi\advance\tmpnum by-5\ifnum\tmpnum>0\repeat}
+\def\tallynum#1{\bgroup\tmpnum=#1\relax\loop\ifnum\tmpnum>0\kern1bp\tallyI\kern1bp\advance\tmpnum by-1\repeat\egroup}
+\def\tallyI{\pdfliteral{q .5 w 0 -1 m 0 8 l S Q}}
+\def\tallyV{\kern1bp\pdfliteral{q .5 w -1 0 m 9 7 l S Q}\tallynum4\kern1bp}
+
+%====================================================%
+
+% Símbolos especiales y de texto
+\newcommand{\longs}{ſ}
+\newcommand{\roundz}{\textipa{Z}}
+\newcommand{\point}{\bullet \raisebox{0.28pt}{\hspace{-1pt}\textbf{-}}\raisebox{0.28pt}{\hspace{-3pt}\textbf{-}}\;}
+\newcommand{\interrobang}{\textinterrobang}
+\newcommand{\interrobangdown}{\textinterrobangdown}
+
+% Flecha de glosario
+\newcommand{\glsarrow}{&{\color{Y1}\;\faCaretRight\;}&}
+
+% Mapeo del acento agudo (´) a comilla tipográfica (')
+\catcode`\´=\active
+\protected\def ´{\textquoteright}
+
+% Mapeo del símbolo de Euro (€) a marvosym
+\catcode`\€=\active
+\protected\def €{\EUR}
+
+% La Comilla Simple (') -> Apostrofe con arreglo dinámico para Texto y Matemáticas
+\makeatletter
+\begingroup
+\catcode`\'=\active
+\gdef'{\ifmmode\expandafter\active@math@prime\else\textquotesingle\fi}
+\endgroup
+\let\active@math@prime\undefined
+\def\active@math@prime{^\bgroup\prim@s}
+\makeatother
+
+\AtBeginDocument{%
+	\catcode`\'=\active
+}
+
+%====================================================%
+
+% Iconos de estado y marcas rápidas
+\newcommand{\cmark}{{\color{G2}\faCheck}}                     % Check verde
+\newcommand{\xmark}{{\color{R2}\faTimes}}                     % Cruz roja
+\newcommand{\warnicon}{{\color{Y2}\faExclamationTriangle}}    % Advertencia amarilla
+\newcommand{\infoicon}{{\color{C2}\faInfoCircle}}             % Info azul
+\newcommand{\noteicon}{{\color{P2}\faStickyNote}}             % Nota morada
