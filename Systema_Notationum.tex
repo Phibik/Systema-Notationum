@@ -111,34 +111,57 @@
 	\end{minidefin}
 	
 	Los hipersímbolos son la clave de los hiperlenguajes figuerolianos, de hecho lo único que separa cada hiperlenguaje figueroliano son las lenguas vírgenes empleadas. En otras palabras, los hipersímbolos se adaptan a cualquier lengua (con escritura estándar) para formar hiperlenguajes figuerolianos.
-
-	\begin{tab}{2}{|+c|-C|}{Signo & Significado}
-		\textnoto{◌} & Marca un argumento \\\hline
-		$\cdots$ & Marca continuación o elipsis \\\hline
-		\guilsinglleft\textnoto{◌}\guilsinglright & Citar \\\hline
-		\guillemotleft\textnoto{◌}\guillemotright & Delimita un lenguaje y queda prohibido el uso en otros lenguajes \\\hline
-		\textquotedblleft\textnoto{◌}\textquotedblright & Delimita un lenguaje como lenguaje objeto \\\hline
-		\textquoteleft\textnoto{◌}\textquoteright & Delimita un lenguaje como metalenguaje \\\hline
-		(\textnoto{◌}) & Comentario \\\hline
-		$\llparenthesis$\textnoto{◌}$\rrparenthesis$ & Fonética \\\hline
-		[\textnoto{◌}] & Adiciones para aclarar citas \\\hline
-		$[$\textnoto{◌}$]$ & Representacion alternativa \\\hline
-		$\llbracket$\textnoto{◌}$\rrbracket$ & Destacar \\\hline
-		$\lfloor$\textnoto{◌}$\rfloor$ & Referencia \\\hline
-		$\lceil$\textnoto{◌}$\rceil$ & Citas tal cual \\\hline
-		$\llfloor$\textnoto{◌}$\rrfloor$ & Citas parafraseadas \\\hline
-		$\llceil$\textnoto{◌}$\rrceil$ & Contexto o marco general \\\hline
-		\textlangle\textnoto{◌}\textrangle & Enlace o localizador \\\hline
-		$\ulcorner$\textnoto{◌}$\urcorner$ & Formalización estricta \\\hline
-		$\llcorner$\textnoto{◌}$\lrcorner$ & Nota técnica al margen \\\hline
-		\textlquill\textnoto{◌}\textrquill & Traducción literal \\\hline
-	\end{tab}
 	
-	\subsubsection{EN PROCESO}
-	lo siguiente no esta pulido, hay que aclarar que se usan otros lenguajes como sujetos, objetos, complementos... y que de esta forma actua el metalenguaje, usando otros lenguajes como sujetos, objetos... Pero no diria que el hiperlenguaje es todo esto, sino que es concretamente las piezas que enlazan, es decir el español y el hipersímbolo
+	\subsubsection{Encapsulación de Otros Lenguajes}
+	Existe una aparente paradoja al analizar cómo conviven el hiperlenguaje y los lenguajes objeto dentro de un mismo enunciado. Podría pensarse que el hiperlenguaje se limita únicamente a las partículas de enlace. Sin embargo, el hiperlenguaje abarca la totalidad de la estructura del enunciado, como veremos con este ejemplo:
 	\[
 	\underset{\text{Hiperlenguaje}}{\underbrace{\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{La extensa}}}\text{ }\underset{\text{Filosofía}}{\underbrace{\vphantom{\text{Lg}}\text{ontología}}}\text{ }\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{puede demostrar}}}\text{ }\underset{\text{Matemáticas}}{\underbrace{\vphantom{\text{Lg}}\varnothing = \{\}}}\,\,\,\underset{\text{Hipersímbolo}}{\underbrace{\vphantom{\text{Lg}}\text{.}}}}}
 	\]
+	No obstante, en su forma estricta, a veces es conveniente usar el delimitador <<\textnoto{◌}>> (se verá a continuación \ref{sec:hypersymbola} REFERIR BIEN) para marcar claramente qué son otros lenguajes (no se marca <<<<\textnoto{◌}>>>> como hipersímbolo por simplicidad visual).
+	\[
+	\underset{\text{Hiperlenguaje}}{\underbrace{\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{La extensa}}}\text{ }\text{<<}\underset{\text{Filosofía}}{\underbrace{\vphantom{\text{Lg}}\text{ontología}}}\text{>>}\text{ }\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{puede demostrar}}}\text{ }\text{<<}\underset{\text{Matemáticas}}{\underbrace{\vphantom{\text{Lg}}\varnothing = \{\}}}\text{>>}\,\,\,\underset{\text{Hipersímbolo}}{\underbrace{\vphantom{\text{Lg}}\text{.}}}}}
+	\]
+	Nota también que la lengua virgen provee la matriz sintáctica base (por ejemplo, la tipología Sujeto-Verbo-Objeto), definiendo las posiciones funcionales donde se alojan los conceptos. De este modo los otros lenguajes quedan \textbf{encapsulados} bajo el hiperlenguaje como elementos sintácticos de la lengua virgen.
+	\[
+	\underset{\text{Hiperlenguaje}}{\underbrace{\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{La extensa}}}\text{ }\underset{\text{Español (sustantivo)}}{\underbrace{\text{<<}\underset{\text{Filosofía}}{\underbrace{\vphantom{\text{Lg}}\text{ontología}}}\text{>>}}}\text{ }\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{puede demostrar}}}\text{ }\underset{\text{Español (objeto)}}{\underbrace{\text{<<}\underset{\text{Matemáticas}}{\underbrace{\vphantom{\text{Lg}}\varnothing = \{\}}}\text{>>}}}\,\,\,\underset{\text{Hipersímbolo}}{\underbrace{\vphantom{\text{Lg}}\text{.}}}}}
+	\]
+	En conclusión, el hiperlenguaje no actúa como un mero conector o enlace superficial entre términos dispares. Por el contrario, opera como el metalenguaje estructural definitivo que encapsula y procesa cualquier lenguaje objeto externo dentro de la matriz sintáctica de la lengua virgen. De este modo, la totalidad del enunciado (tanto la arquitectura lógica como las partículas importadas) queda plenamente integrada bajo la jerarquía del hiperlenguaje.
+
+
+	
+	\section{Hipersímbolos Figuerolianos}\label{sec:hypersymbola}
+	
+	\begin{minidefin}
+		Los hipersímbolos figuerolianos se componen de hiperconstantes, hiperbloques, hiperdelimitadores, hipersignos y de los símbolos figuerolianos \ref{chap:symbola} REFERIR BIEN
+	\end{minidefin}
+	
+	YO HARIA QUE, el unico hipersímbolo sea << y >> con un argumento opcional tipo <<$_\mathcal{A}$Hola que tal>> o <<$^\mathcal{A}$Hola que tal>>.
+%
+%	\begin{tab}{2}{|+c|-C|}{Signo & Significado}
+%		\textnoto{◌} & Marca un argumento \\\hline
+%		$\cdots$ & Marca continuación o elipsis \\\hline
+%		\guilsinglleft\textnoto{◌}\guilsinglright & Citar \\\hline
+%		\guillemotleft\textnoto{◌}\guillemotright & Delimita un lenguaje y queda prohibido el uso en otros lenguajes \\\hline
+%		\textquotedblleft\textnoto{◌}\textquotedblright & Delimita un lenguaje como lenguaje objeto \\\hline
+%		\textquoteleft\textnoto{◌}\textquoteright & Delimita un lenguaje como metalenguaje \\\hline
+%		(\textnoto{◌}) & Comentario \\\hline
+%		$\llparenthesis$\textnoto{◌}$\rrparenthesis$ & Fonética \\\hline
+%		[\textnoto{◌}] & Adiciones para aclarar citas \\\hline
+%		$[$\textnoto{◌}$]$ & Representacion alternativa \\\hline
+%		$\llbracket$\textnoto{◌}$\rrbracket$ & Destacar \\\hline
+%		$\lfloor$\textnoto{◌}$\rfloor$ & Referencia \\\hline
+%		$\lceil$\textnoto{◌}$\rceil$ & Citas tal cual \\\hline
+%		$\llfloor$\textnoto{◌}$\rrfloor$ & Citas parafraseadas \\\hline
+%		$\llceil$\textnoto{◌}$\rrceil$ & Contexto o marco general \\\hline
+%		\textlangle\textnoto{◌}\textrangle & Enlace o localizador \\\hline
+%		$\ulcorner$\textnoto{◌}$\urcorner$ & Formalización estricta \\\hline
+%		$\llcorner$\textnoto{◌}$\lrcorner$ & Nota técnica al margen \\\hline
+%		\textlquill\textnoto{◌}\textrquill & Traducción literal \\\hline
+%	\end{tab}
+	
+	
+	
+	
 	
 	\chap{Lenguaje Matemático}
 	\section{Fórmulas}
@@ -171,19 +194,15 @@
 	
 	
 	
+	\chap{Símbolos Figuerolianos}\label{chap:symbola}
+	
+	\section{Sagittulae Fīgherōliānae}
 	
 	
-	\chap{Sagittulae Fīgherōliānae}
+
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	\chap{Signa Fīgherōliāna}
+	\section{Signa Fīgherōliāna}
 	
 	
 	
