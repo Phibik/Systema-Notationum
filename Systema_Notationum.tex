@@ -117,7 +117,7 @@
 	\[
 	\underset{\text{Hiperlenguaje}}{\underbrace{\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{La extensa}}}\text{ }\underset{\text{Filosofía}}{\underbrace{\vphantom{\text{Lg}}\text{ontología}}}\text{ }\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{puede demostrar}}}\text{ }\underset{\text{Matemáticas}}{\underbrace{\vphantom{\text{Lg}}\varnothing = \{\}}}\,\,\,\underset{\text{Hipersímbolo}}{\underbrace{\vphantom{\text{Lg}}\text{.}}}}}
 	\]
-	No obstante, en su forma estricta, a veces es conveniente usar el delimitador <<\textnoto{◌}>> (se verá a continuación \ref{sec:hypersymbola} REFERIR BIEN) para marcar claramente qué son otros lenguajes (no se marca <<<<\textnoto{◌}>>>> como hipersímbolo por simplicidad visual).
+	No obstante, en su forma estricta, a veces es conveniente usar el delimitador <<\textnoto{◌}>> (se verá a continuación \ref{sec:hypersymbola} REFERIR BIEN) para marcar claramente qué son otros lenguajes (no se marca <<\textnoto{◌}>> como hipersímbolo por simplicidad visual).
 	\[
 	\underset{\text{Hiperlenguaje}}{\underbrace{\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{La extensa}}}\text{ }\text{<<}\underset{\text{Filosofía}}{\underbrace{\vphantom{\text{Lg}}\text{ontología}}}\text{>>}\text{ }\underset{\text{Español}}{\underbrace{\vphantom{\text{Lg}}\text{puede demostrar}}}\text{ }\text{<<}\underset{\text{Matemáticas}}{\underbrace{\vphantom{\text{Lg}}\varnothing = \{\}}}\text{>>}\,\,\,\underset{\text{Hipersímbolo}}{\underbrace{\vphantom{\text{Lg}}\text{.}}}}}
 	\]
@@ -132,34 +132,63 @@
 	\section{Hipersímbolos Figuerolianos}\label{sec:hypersymbola}
 	
 	\begin{minidefin}
-		Los hipersímbolos figuerolianos se componen de hiperconstantes, hiperbloques, hiperdelimitadores, hipersignos y de los símbolos figuerolianos \ref{chap:symbola} REFERIR BIEN
+		Los hipersímbolos figuerolianos se componen de:
+		\begin{itemize}
+			\item Hiperconstantes
+			\item Hiperbloques
+			\item Hipersignos
+			\item Hiperdelimitadores
+		\end{itemize}
 	\end{minidefin}
 	
+	\subsection{Generalización de los Símbolos Tradicionales}
+	
+	Estos son los hipersímbolos tradicionales con sus respectivos usos normalemente, algunos se les extiende el uso. ASI SE PERMITE UNA CAPA PRACTICA Y OTRA CANONICA, la practica para uso mas barriobajero, y cuando se dispone del inventario simbolico precision canonica.
+	\begin{tab}{3}{|+c|-C|-C|}{Símbolo & Significado & Significado Expandido}
+		. & Final de frase & Final \\\hline
+		, & Separación de elementos & Separador \\\hline
+		; & Separación de frases & Separador superior \\\hline
+		: & Introducción & Introducción \\\hline
+		... & Elipsis & Elipsis \\\hline
+		¿\textnoto{◌}? & Interrogación & Interrogación \\\hline
+		¡\textnoto{◌}! & Exclamación & Exclamación \\\hline
+		(\textnoto{◌}) & Aclaración/Comentario & Aclaración/Comentario \\\hline
+		[\textnoto{◌}] & Adición a una cita, referencia, fonética... & Adición pura \\\hline
+		\guillemotleft\textnoto{◌}\guillemotright & Delimitador primario & Delimitador de lenguaje \\\hline
+		\textquotedblleft\textnoto{◌}\textquotedblright & Delimitador secundario & Delimitador literal \\\hline
+		\textquoteleft\textnoto{◌}\textquoteright & Delimitador terciario & Delimitador parafraseador \\\hline
+	\end{tab}
+	
+	
+	Abreviaciones con punto hacerlas como: $\overline{\text{ıe}}$, $\overline{\text{eg}}$. Podriamos decir que overline es un signo que hace reune abreviaciones.
+	
 	YO HARIA QUE, el unico hipersímbolo sea << y >> con un argumento opcional tipo <<$_\mathcal{A}$Hola que tal>> o <<$^\mathcal{A}$Hola que tal>>.
-%
-%	\begin{tab}{2}{|+c|-C|}{Signo & Significado}
-%		\textnoto{◌} & Marca un argumento \\\hline
-%		$\cdots$ & Marca continuación o elipsis \\\hline
-%		\guilsinglleft\textnoto{◌}\guilsinglright & Citar \\\hline
-%		\guillemotleft\textnoto{◌}\guillemotright & Delimita un lenguaje y queda prohibido el uso en otros lenguajes \\\hline
-%		\textquotedblleft\textnoto{◌}\textquotedblright & Delimita un lenguaje como lenguaje objeto \\\hline
-%		\textquoteleft\textnoto{◌}\textquoteright & Delimita un lenguaje como metalenguaje \\\hline
-%		(\textnoto{◌}) & Comentario \\\hline
-%		$\llparenthesis$\textnoto{◌}$\rrparenthesis$ & Fonética \\\hline
-%		[\textnoto{◌}] & Adiciones para aclarar citas \\\hline
-%		$[$\textnoto{◌}$]$ & Representacion alternativa \\\hline
-%		$\llbracket$\textnoto{◌}$\rrbracket$ & Destacar \\\hline
-%		$\lfloor$\textnoto{◌}$\rfloor$ & Referencia \\\hline
-%		$\lceil$\textnoto{◌}$\rceil$ & Citas tal cual \\\hline
-%		$\llfloor$\textnoto{◌}$\rrfloor$ & Citas parafraseadas \\\hline
-%		$\llceil$\textnoto{◌}$\rrceil$ & Contexto o marco general \\\hline
-%		\textlangle\textnoto{◌}\textrangle & Enlace o localizador \\\hline
-%		$\ulcorner$\textnoto{◌}$\urcorner$ & Formalización estricta \\\hline
-%		$\llcorner$\textnoto{◌}$\lrcorner$ & Nota técnica al margen \\\hline
-%		\textlquill\textnoto{◌}\textrquill & Traducción literal \\\hline
-%	\end{tab}
+
+	\begin{tab}{2}{|+c|-C|}{Signo & Significado}
+		\textnoto{◌} & Marca un argumento \\\hline
+		$\cdots$ & Marca continuación o elipsis \\\hline
+	\end{tab}
 	
 	
+	\guilsinglleft\textnoto{◌}\guilsinglright, \guillemotleft\textnoto{◌}\guillemotright, \textquotedblleft\textnoto{◌}\textquotedblright, \textquoteleft\textnoto{◌}\textquoteright, (\textnoto{◌}), $\llparenthesis$\textnoto{◌}$\rrparenthesis$, [\textnoto{◌}], $[$\textnoto{◌}$]$, $\llbracket$\textnoto{◌}$\rrbracket$, $\lfloor$\textnoto{◌}$\rfloor$, $\lceil$\textnoto{◌}$\rceil$, $\llfloor$\textnoto{◌}$\rrfloor$, $\llceil$\textnoto{◌}$\rrceil$, \textlangle\textnoto{◌}\textrangle, $\ulcorner$\textnoto{◌}$\urcorner$, $\llcorner$\textnoto{◌}$\lrcorner$, \textlquill\textnoto{◌}\textrquill
+	
+	-, Relación; --, Interrupción.
+	
+	\begin{tab}{2}{|+c|-C|}{Signo & Significado}
+		\guilsinglleft\textnoto{◌}\guilsinglright & Delimita un metalenguaje \\\hline
+		\guillemotleft\textnoto{◌}\guillemotright & Delimita un lenguaje \\\hline
+		\textquotedblleft\textnoto{◌}\textquotedblright & Cita literal \\\hline
+		\textquoteleft\textnoto{◌}\textquoteright & Parafraseo o cita traducida \\\hline
+		(\textnoto{◌}) & Comentario \\\hline
+		$[$\textnoto{◌}$]$ & Adiciones (fonética o desambiguar citas) \\\hline
+		$\llbracket$\textnoto{◌}$\rrbracket$ & Referenciar \\\hline
+		$\lfloor$\textnoto{◌}$\rfloor$ & Adiciones a citas literales \\\hline
+		\textlangle\textnoto{◌}\textrangle & Delimita algo opcional \\\hline
+		$\ulcorner$\textnoto{◌}$\urcorner$ & Nombre \\\hline
+		\{\textnoto{◌}\} & Agrupación \\\hline
+	\end{tab}
+	
+	Al analizar el término \guillemotleft Wahrheit\guillemotright\ $\llparenthesis$ˈvaːɐ̯haɪ̯t$\rrparenthesis$ $\lfloor$Frege, 1918, p. 58$\rfloor$, el \guilsinglleft$\wedge$\guilsinglright\ toma la cita literal \textquotedblleft Der Gedanke\textquotedblright\ [redactada en su borrador final] y la asimila como \textquoteleft el contenido objetivo del pensamiento\textquoteright\ (principio central de su ontología). A través de este proceso, el término formalizado $\ulcorner\nu\urcorner$ evalúa el lenguaje objeto \guillemotleft$\forall x (P(x) \to Q(x))$\guillemotright\ para computar su denotación exacta $\llbracket \text{Wahrheit} \rrbracket = 1$.
 	
 	
 	
